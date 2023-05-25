@@ -5,7 +5,13 @@ export default {
         "./src/**/*.{js,ts,jsx,tsx,html}",
     ],
 	theme: {
-		extend: {},
+		extend: {
+            fontFamily: {
+                "custom": ["Wix Madefor Display", "sans-serif"],
+            }
+        },
 	},
-	plugins: [],
+	plugins: [
+        require('tailwind-scrollbar'),
+    ],
 };
