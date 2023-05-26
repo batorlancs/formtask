@@ -1,6 +1,7 @@
 import React from "react";
 import CompanyTextInput from "./inputs/CompanyTextInput";
 import CompanyTextAreaInput from "./inputs/CompanyTextAreaInput";
+import PrevNextButtons from "../sharedComponents/PrevNextButtons";
 
 const Step1 = (props) => {
 	const handleSubmit = (event) => {
@@ -93,12 +94,13 @@ const Step1 = (props) => {
 					actionType="description"
 				/>
 			</div>
-			<button
+			{/* <button
 				type="submit"
 				className="px-12 py-4 bg-red-500 bg-opacity-30 rounded-3xl mt-6 float-right"
 			>
 				Next
-			</button>
+			</button> */}
+            <PrevNextButtons incCurrStepBy={props.incCurrStepBy} previous={false} next={true}/>
 		</form>
 	);
 };

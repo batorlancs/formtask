@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import CompanyTextInput from "../step1/inputs/CompanyTextInput";
 import Step2Form from "./forms/EmployeeForm";
+import PrevNextButtons from "../sharedComponents/PrevNextButtons";
 
 const Step2 = (props) => {
 	const numOfEmpRef = useRef(null);
@@ -22,7 +23,7 @@ const Step2 = (props) => {
 				dispatch={props.dispatch}
 				actionType="numOfEmp"
 				error={props.state.numOfEmp.error}
-				reference={numOfEmpRef}
+                value={props.state.numOfEmp.value}
 			/>
 			<div className="w-full mt-12 grid grid-cols-2 gap-6 ">
 				{Array.from(
@@ -32,6 +33,7 @@ const Step2 = (props) => {
 					)
 				)}
 			</div>
+            <PrevNextButtons incCurrStepBy={props.incCurrStepBy} previous={true} next={true}/>
 		</div>
 	);
 };

@@ -1,13 +1,13 @@
 import React from "react";
 
 const CompanyTextInput = (props) => {
-	const { type, placeholder, label, dispatch, actionType, error, reference } = props;
+	const { type, placeholder, label, dispatch, actionType, error,  value } = props;
 
 	return (
 		<div className="">
 			<h2 className="text-base mb-2">{label}</h2>
 			<input
-                ref={reference}
+                value={value}
 				type={type}
 				placeholder={placeholder}
 				onChange={(e) => {

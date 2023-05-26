@@ -1,40 +1,44 @@
 import React from "react";
 import EmployeeTextInput from "./inputs/EmployeeTextInput";
+import EmployeeDropDownInput from "./inputs/EmployeeDropDownInput";
+import EmployeeFileInput from "./inputs/EmployeeFileInput";
+import PrevNextButtons from "../../sharedComponents/PrevNextButtons";
 
 const EmployeeForm = (props) => {
 	return (
 		<div className="w-full min-h-32 bg-black bg-opacity-5 rounded-2xl p-6">
-            <h1 className="font-bold mb-6 rounded-2xl w-full bg-black bg-opacity-5 p-2 pl-8">{props.index}. Employee</h1>
+            <div className="flex flex-row gap-4 items-center justify-start mb-6">
+                <div className="font-bold text-red-600 text-xl bg-red-500 bg-opacity-10 h-10 w-10 rounded-full flex items-center justify-center">{props.index}</div>
+                <h1 className="font-bold text-xl">Employee</h1>
+            </div>
 			<div className="w-full flex flex-col gap-4">
                 <EmployeeTextInput
                     type="text"
-                    placeholder="Employee Exmaple"
-                    label="Full Name"
+                    placeholder="Full Name"
                     dispatch={null}
                     actionType="numOfEmp"
                     error=""
-                    reference={null}
                 />
                 <EmployeeTextInput
                     type="email"
-                    placeholder="employee@company.com"
-                    label="Email"
+                    placeholder="Email"
                     dispatch={null}
                     actionType="numOfEmp"
                     error=""
-                    reference={null}
                 />
-                {/* dropdown menu input */}
-                <EmployeeTextInput
-                    type="number"
-                    placeholder="18+"
-                    label="Age"
-                    dispatch={null}
-                    actionType="numOfEmp"
-                    error=""
-                    reference={null}
+                <EmployeeDropDownInput 
+                    value="Accountant"
                 />
-                {/* file input with pdf */}
+                <div className="w-full grid grid-cols-2 gap-4">
+                    <EmployeeTextInput
+                        type="number"
+                        placeholder="Age"
+                        dispatch={null}
+                        actionType="numOfEmp"
+                        error=""
+                    />
+                    <EmployeeFileInput />
+                </div>
             </div>
 		</div>
 	);

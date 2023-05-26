@@ -36,29 +36,29 @@ const RightBox = (props) => {
 	};
 
 	const loadStep = () => {
-		// if (currStep === 1)
-		// 	return (
-		// 		<Step1
-		// 			incCurrStepBy={incCurrStepBy}
-		// 			state={state}
-		// 			dispatch={dispatch}
-		// 		/>
-		// 	);
-		// else if (currStep === 2)
-		// 	return (
-		// 		<Step2
-		// 			incCurrStepBy={incCurrStepBy}
-		// 			state={state}
-		// 			dispatch={dispatch}
-		// 		/>
-		// 	);
-		return (
-			<Step2
-				incCurrStepBy={incCurrStepBy}
-				state={state}
-				dispatch={dispatch}
-			/>
-		);
+		if (currStep === 1)
+			return (
+				<Step1
+					incCurrStepBy={incCurrStepBy}
+					state={state}
+					dispatch={dispatch}
+				/>
+			);
+		else if (currStep === 2)
+			return (
+				<Step2
+					incCurrStepBy={incCurrStepBy}
+					state={state}
+					dispatch={dispatch}
+				/>
+			);
+		// return (
+		// 	<Step2
+		// 		incCurrStepBy={incCurrStepBy}
+		// 		state={state}
+		// 		dispatch={dispatch}
+		// 	/>
+		// );
 	};
 
 	const [state, dispatch] = useReducer(reducer, {
@@ -79,7 +79,7 @@ const RightBox = (props) => {
 		},
 	});
 
-	console.log(state);
+	// console.log(state);
 
 	return (
 		<div
