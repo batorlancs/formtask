@@ -9,7 +9,9 @@ const options = [
 ];
 
 const EmployeeDropDownInput = (props) => {
-	const [currOption, setCurrOption] = useState(props.value);
+	const { index, change, employees, changeEmployee } = props;
+
+	const [currOption, setCurrOption] = useState(employees[index][change]);
 	const [dropDown, setDropDown] = useState(false);
 	const ref = useRef(null);
 
@@ -19,10 +21,15 @@ const EmployeeDropDownInput = (props) => {
 
 	const changeCurrOption = (newOption) => {
 		toggleDropDown();
+        // store data in json
+        let temp = { ...employees[index] };
+        temp[change] = newOption;
+        changeEmployee(index, temp);
+        //
 		setCurrOption(newOption);
 	};
 
-    // when clicking outside hide drop down
+	// when clicking outside hide drop down
 	useEffect(() => {
 		const handleOutsideClick = (event) => {
 			if (ref.current && !ref.current.contains(event.target)) {
@@ -38,7 +45,7 @@ const EmployeeDropDownInput = (props) => {
 	}, []);
 
 	return (
-		<div ref={ref} >
+		<div ref={ref}>
 			<div className="relative">
 				<button
 					onClick={toggleDropDown}

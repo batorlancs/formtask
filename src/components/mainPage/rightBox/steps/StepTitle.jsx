@@ -5,7 +5,7 @@ const stepTitles = [
 	"Company Details",
 	"Employee Details",
 	"Verfify Details",
-	"Thank you",
+	"Complete",
 ];
 const totalNumOfSteps = 4;
 

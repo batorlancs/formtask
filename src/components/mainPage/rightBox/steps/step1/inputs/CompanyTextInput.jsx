@@ -1,7 +1,7 @@
 import React from "react";
 
 const CompanyTextInput = (props) => {
-	const { type, placeholder, label, dispatch, actionType, error,  value } = props;
+	const { value, type, placeholder, label, dispatch, actionType, error } = props;
 
 	return (
 		<div className="">
@@ -9,6 +9,7 @@ const CompanyTextInput = (props) => {
 			<input
                 value={value}
 				type={type}
+                inputMode={type === "number" ? "numeric" : ""}
 				placeholder={placeholder}
 				onChange={(e) => {
 					dispatch({ type: actionType, value: e.target.value });

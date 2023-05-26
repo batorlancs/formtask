@@ -4,19 +4,17 @@ import CompanyTextAreaInput from "./inputs/CompanyTextAreaInput";
 import PrevNextButtons from "../sharedComponents/PrevNextButtons";
 
 const Step1 = (props) => {
+	const { incCurrStepBy, state, dispatch } = props;
+
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		clearErrors();
 		if (validateFormSuccess() === true) {
-			props.incCurrStepBy(1);
-			console.log("submitted");
-		} else {
-			console.log("en error occured");
+			incCurrStepBy(1);
 		}
 	};
 
 	const validateFormSuccess = () => {
-		const { state, dispatch } = props;
 		if (state.name.value === "") {
 			dispatch({
 				type: "nameError",
@@ -55,52 +53,54 @@ const Step1 = (props) => {
 	};
 
 	const clearErrors = () => {
-		props.dispatch({ type: "nameError", value: "" });
-		props.dispatch({ type: "emailError", value: "" });
-		props.dispatch({ type: "numOfEmpError", value: "" });
+		dispatch({ type: "nameError", value: "" });
+		dispatch({ type: "emailError", value: "" });
+		dispatch({ type: "numOfEmpError", value: "" });
 	};
 
 	return (
 		<form onSubmit={handleSubmit} noValidate>
 			<div className="flex flex-col gap-2">
 				<CompanyTextInput
+					value={state.name.value}
 					type="text"
 					placeholder="Company Name Example Kft."
 					label="Name"
-					dispatch={props.dispatch}
+					dispatch={dispatch}
 					actionType="name"
-					error={props.state.name.error}
+					error={state.name.error}
 				/>
 				<CompanyTextInput
+					value={state.email.value}
 					type="email"
 					placeholder="example@company.com"
 					label="Email"
-					dispatch={props.dispatch}
+					dispatch={dispatch}
 					actionType="email"
-					error={props.state.email.error}
+					error={state.email.error}
 				/>
 				<CompanyTextInput
+					value={state.numOfEmp.value}
 					type="text"
 					placeholder="1 - 100"
 					label="Number of Employees"
-					dispatch={props.dispatch}
+					dispatch={dispatch}
 					actionType="numOfEmp"
-					error={props.state.numOfEmp.error}
+					error={state.numOfEmp.error}
 				/>
 				<CompanyTextAreaInput
+					value={state.description.value}
 					placeholder="..."
 					label="Description (optional)"
-					dispatch={props.dispatch}
+					dispatch={dispatch}
 					actionType="description"
 				/>
 			</div>
-			{/* <button
-				type="submit"
-				className="px-12 py-4 bg-red-500 bg-opacity-30 rounded-3xl mt-6 float-right"
-			>
-				Next
-			</button> */}
-            <PrevNextButtons incCurrStepBy={props.incCurrStepBy} previous={false} next={true}/>
+			<PrevNextButtons
+				incCurrStepBy={props.incCurrStepBy}
+				previous={false}
+				next={true}
+			/>
 		</form>
 	);
 };
