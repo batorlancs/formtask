@@ -4,7 +4,7 @@ import CheckIcon from "../../../../../../../assets/icons/checkIcon.svg";
 const EmployeeFileInput = (props) => {
 	const { index, change, employees, changeEmployee } = props;
 
-	const [file, setFile] = useState(null);
+	const [file, setFile] = useState(employees[index][change]);
 	const [isHover, setIsHover] = useState(false);
 
 	const handleFileChange = (event) => {
@@ -13,10 +13,11 @@ const EmployeeFileInput = (props) => {
 		if (f && f.type === "application/pdf") {
             // save data
             let temp = { ...employees[index] };
-            temp[change] = f.name;
+            temp[change] = f;
             changeEmployee(index, temp);
             //
 			setFile(f);
+            setIsHover(false);
 		} else {
 			alert("Please select a PDF file!");
 		}
@@ -37,7 +38,10 @@ const EmployeeFileInput = (props) => {
 				className="w-full h-full bg-black bg-opacity-10 rounded-2xl flex items-center justify-center cursor-pointer px-4 overflow-hidden"
 			>
 				{file ? (
-					<img src={CheckIcon} className="h-6"></img>
+					<div className="flex flex-row items-center justify-center gap-2">
+                        <p>CV</p>
+                        <img src={CheckIcon} className="h-6"></img>
+                    </div>
 				) : (
 					<p className="">Import CV</p>
 				)}

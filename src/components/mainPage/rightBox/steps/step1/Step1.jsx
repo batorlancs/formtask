@@ -100,6 +100,8 @@ const Step1 = (props) => {
 				incCurrStepBy={props.incCurrStepBy}
 				previous={false}
 				next={true}
+                isSubmit={true}
+                isfinal={false}
 			/>
 		</form>
 	);

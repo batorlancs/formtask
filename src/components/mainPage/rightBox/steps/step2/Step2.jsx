@@ -6,6 +6,10 @@ import PrevNextButtons from "../sharedComponents/PrevNextButtons";
 const Step2 = (props) => {
 	const { incCurrStepBy, state, dispatch, employees, changeEmployee } = props;
 
+    const handleNext = () => {
+        incCurrStepBy(1);
+    }
+
 	return (
 		<div>
 			<CompanyTextInput
@@ -33,7 +37,9 @@ const Step2 = (props) => {
 				incCurrStepBy={incCurrStepBy}
 				previous={true}
 				next={true}
-				isForm={false}
+				isSubmit={false}
+                isFinal={false}
+                handleNext={handleNext}
 			/>
 		</div>
 	);

@@ -40,17 +40,37 @@ const reducer = (state, action) => {
 };
 
 const RightBox = (props) => {
-	const [state, dispatch] = useReducer(reducer, {
+
+	// const [state, dispatch] = useReducer(reducer, {
+	// 	name: {
+	// 		value: "",
+	// 		error: "",
+	// 	},
+	// 	email: {
+	// 		value: "",
+	// 		error: "",
+	// 	},
+	// 	numOfEmp: {
+	// 		value: "",
+	// 		error: "",
+	// 	},
+	// 	description: {
+	// 		value: "",
+	// 	},
+	// });
+
+    // dev resources
+    const [state, dispatch] = useReducer(reducer, {
 		name: {
-			value: "",
+			value: "dev",
 			error: "",
 		},
 		email: {
-			value: "",
+			value: "dev@dev.com",
 			error: "",
 		},
 		numOfEmp: {
-			value: "",
+			value: "1",
 			error: "",
 		},
 		description: {
@@ -64,9 +84,11 @@ const RightBox = (props) => {
 			email: "",
 			jobTitle: "Accountant",
 			age: "",
-			CV: "",
+			CV: null,
 		},
 	]);
+
+    console.log(employees);
 
 	const populateEmployees = (length) => {
 		let employeeData = {

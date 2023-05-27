@@ -1,7 +1,7 @@
 import React from "react";
 
 const PrevNextButtons = (props) => {
-	const { incCurrStepBy, previous, next, isSubmit, isForm } = props;
+	const { incCurrStepBy, previous, next, isSubmit, isFinal, handleNext } = props;
 
 	return (
 		<div className="w-full mt-12 mb-12 flex justify-end">
@@ -16,22 +16,19 @@ const PrevNextButtons = (props) => {
 						Previous
 					</button>
 				)}
-				{(next || (isForm && isForm === true)) && (
+				{next && isSubmit === true ? (
 					<button
-                        type="submit"
+						type="submit"
 						className="py-4 w-[150px] rounded-2xl bg-red-400 font-bold text-white"
 					>
-						{isSubmit && isSubmit === true ? "Submit" : "Next"}
+						{isFinal && isFinal === true ? "Submit" : "Next"}
 					</button>
-				)}
-                {next && (isForm && isForm === false) && (
+				) : (
 					<button
-                        onClick={() => {
-                            incCurrStepBy(1);
-                        }}
+						onClick={handleNext}
 						className="py-4 w-[150px] rounded-2xl bg-red-400 font-bold text-white"
 					>
-						{isSubmit && isSubmit === true ? "Submit" : "Next"}
+						{isFinal && isFinal === true ? "Submit" : "Next"}
 					</button>
 				)}
 			</div>
