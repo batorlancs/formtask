@@ -89,6 +89,8 @@ const RightBox = (props) => {
 		},
 	]);
 
+    const [firebaseID, setFirebaseID] = useState("");
+
     console.log(employees);
 
 	const populateEmployees = (length) => {
@@ -148,9 +150,15 @@ const RightBox = (props) => {
 					incCurrStepBy={incCurrStepBy}
 					state={state}
                     employees={employees}
+                    setFirebaseID={setFirebaseID}
 				/>
 			);
-		else if (currStep === 4) return <Step4 />;
+		else if (currStep === 4)
+            return (
+                <Step4 
+                    firebaseID={firebaseID}
+                />
+            );
 
 		// return (
 		// 	<Step2

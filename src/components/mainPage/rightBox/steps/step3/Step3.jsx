@@ -2,13 +2,38 @@ import React from "react";
 import PrevNextButtons from "../sharedComponents/PrevNextButtons";
 import CompanyPreview from "./previews/CompanyPreview";
 import EmployeePreview from "./previews/EmployeePreview";
+import { db } from "../../../../../firebase";
+import { collection, doc, addDoc, setDoc } from "firebase/firestore";
 
 const Step3 = (props) => {
-	const { incCurrStepBy, state, employees } = props;
+	const { incCurrStepBy, state, employees, setFirebaseID } = props;
 
-	const handleSubmit = (event) => {
+	const handleSubmit = async (event) => {
 		event.preventDefault();
-		props.incCurrStepBy(1);
+
+        // send data to firebase
+        const companyRef = await addDoc(collection(db, "companies"), {
+            name: state.name.value,
+            email: state.email.value,
+            numOfEmp: state.numOfEmp.value,
+            description: state.description.value,
+        })
+
+        for (let index = 0; index < state.numOfEmp.value; index++) {
+            let emp = employees[index];
+            let employeeRef = doc(db, `companies/${companyRef.id}/employees`, index.toString());
+            await setDoc(employeeRef, {
+                name: emp.name,
+                email: emp.email,
+                jobTitle: emp.jobTitle,
+                age: emp.age,
+                CV: "testing",
+            })
+        }
+
+        setFirebaseID(companyRef.id);
+
+		incCurrStepBy(1);
 	};
 
 	return (
@@ -28,7 +53,7 @@ const Step3 = (props) => {
 					))}
 			</div>
 			<PrevNextButtons
-				incCurrStepBy={props.incCurrStepBy}
+				incCurrStepBy={incCurrStepBy}
 				previous={true}
 				next={true}
 				isSubmit={true}
