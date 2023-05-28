@@ -4,7 +4,7 @@ const EmployeeTextInput = (props) => {
 	const {
 		index,
         change,
-		employees,
+		employee,
 		changeEmployee,
 		type,
 		placeholder,
@@ -12,15 +12,16 @@ const EmployeeTextInput = (props) => {
 	} = props;
 
 	const handleChange = (value) => {
-		let temp = { ...employees[index] };
+		let temp = { ...employee };
 		temp[change] = value;
+        temp["error"] = "";
 		changeEmployee(index, temp);
 	};
 
 	return (
 		<div className="">
 			<input
-                value={employees[index] && employees[index][change]}
+                value={employee && employee[change]}
 				type={type}
 				placeholder={placeholder}
 				onChange={(event) => {

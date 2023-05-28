@@ -85,6 +85,7 @@ const RightBox = (props) => {
 			jobTitle: "Accountant",
 			age: "",
 			CV: null,
+            error: "",
 		},
 	]);
 
@@ -96,7 +97,8 @@ const RightBox = (props) => {
 			email: "",
 			jobTitle: "Accountant",
 			age: "",
-			CV: "",
+			CV: null,
+            error: ""
 		};
 		for (let i = 0; i < length - employees.length; i++) {
 			setEmployees((prev) => [...prev, employeeData]);
@@ -108,9 +110,11 @@ const RightBox = (props) => {
 	}, [state.numOfEmp.value]);
 
 	const changeEmployee = (index, employee) => {
-		let temp = [...employees];
-		temp[index] = employee;
-		setEmployees(temp);
+        setEmployees(prev => {
+            let temp = [...prev];
+            temp[index] = employee;
+            return temp;
+        })
 	};
 
 	const [currStep, setCurrStep] = useState(1);
@@ -143,7 +147,7 @@ const RightBox = (props) => {
 				<Step3
 					incCurrStepBy={incCurrStepBy}
 					state={state}
-					dispatch={dispatch}
+                    employees={employees}
 				/>
 			);
 		else if (currStep === 4) return <Step4 />;
@@ -170,7 +174,7 @@ const RightBox = (props) => {
 				{props.startedForm ? (
 					<>
 						<StepTitle currStep={currStep} />
-						{LoadCurrentStep()}
+						{ LoadCurrentStep() }
 					</>
 				) : (
 					<GetStarted toggleStartedForm={props.toggleStartedForm} />

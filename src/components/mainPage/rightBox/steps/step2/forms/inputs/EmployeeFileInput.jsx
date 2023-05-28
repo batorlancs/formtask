@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import CheckIcon from "../../../../../../../assets/icons/checkIcon.svg";
 
 const EmployeeFileInput = (props) => {
-	const { index, change, employees, changeEmployee } = props;
+	const { index, change, employee, changeEmployee } = props;
 
-	const [file, setFile] = useState(employees[index][change]);
+	const [file, setFile] = useState(employee[change]);
 	const [isHover, setIsHover] = useState(false);
 
 	const handleFileChange = (event) => {
@@ -12,8 +12,9 @@ const EmployeeFileInput = (props) => {
 
 		if (f && f.type === "application/pdf") {
             // save data
-            let temp = { ...employees[index] };
+            let temp = { ...employee };
             temp[change] = f;
+            temp["error"] = "";
             changeEmployee(index, temp);
             //
 			setFile(f);

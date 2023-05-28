@@ -9,9 +9,9 @@ const options = [
 ];
 
 const EmployeeDropDownInput = (props) => {
-	const { index, change, employees, changeEmployee } = props;
+	const { index, change, employee, changeEmployee } = props;
 
-	const [currOption, setCurrOption] = useState(employees[index][change]);
+	const [currOption, setCurrOption] = useState(employee[change]);
 	const [dropDown, setDropDown] = useState(false);
 	const ref = useRef(null);
 
@@ -22,7 +22,7 @@ const EmployeeDropDownInput = (props) => {
 	const changeCurrOption = (newOption) => {
 		toggleDropDown();
         // store data in json
-        let temp = { ...employees[index] };
+        let temp = { ...employee };
         temp[change] = newOption;
         changeEmployee(index, temp);
         //
