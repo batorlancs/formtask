@@ -3,9 +3,15 @@ import CompanyTextInput from "./inputs/CompanyTextInput";
 import CompanyTextAreaInput from "./inputs/CompanyTextAreaInput";
 import PrevNextButtons from "../sharedComponents/PrevNextButtons";
 
+/**
+ * This component is Step 1, Filling in Company data of the form
+ */
 const Step1 = (props) => {
-	const { incCurrStepBy, state, dispatch } = props;
+	const { incCurrStepBy, company, dispatchCompany } = props;
 
+    /**
+     * This function cleans all errors and revalidates each field, moves user to the next step
+     */
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		clearErrors();
@@ -14,36 +20,41 @@ const Step1 = (props) => {
 		}
 	};
 
+    /**
+     * This function validates each field for the company form
+     * 
+     * @returns if validation ends in success -> true, is validation ends in error -> false
+     */
 	const validateFormSuccess = () => {
-		if (state.name.value === "") {
-			dispatch({
+		if (company.name.value === "") {
+			dispatchCompany({
 				type: "nameError",
 				value: "Please provide a name!",
 			});
 			return false;
 		}
-		if (state.email.value === "") {
-			dispatch({
+		if (company.email.value === "") {
+			dispatchCompany({
 				type: "emailError",
 				value: "Please provide an email!",
 			});
 			return false;
-		} else if (!/\S+@\S+\.\S+/.test(state.email.value)) {
-			dispatch({
+		} else if (!/\S+@\S+\.\S+/.test(company.email.value)) {
+			dispatchCompany({
 				type: "emailError",
 				value: "Email is invalid!",
 			});
 			return false;
 		}
-		if (state.numOfEmp.value === "") {
-			dispatch({
+		if (company.numOfEmp.value === "") {
+			dispatchCompany({
 				type: "numOfEmpError",
 				value: "Please provide the number of employees!",
 			});
 			return false;
 		}
-		if (state.numOfEmp.value < 1 || state.numOfEmp.value > 100) {
-			dispatch({
+		if (company.numOfEmp.value < 1 || company.numOfEmp.value > 100) {
+			dispatchCompany({
 				type: "numOfEmpError",
 				value: "Number of employees must be between 1 - 100!",
 			});
@@ -52,47 +63,50 @@ const Step1 = (props) => {
 		return true;
 	};
 
+    /**
+     * clear all errors in company form
+     */
 	const clearErrors = () => {
-		dispatch({ type: "nameError", value: "" });
-		dispatch({ type: "emailError", value: "" });
-		dispatch({ type: "numOfEmpError", value: "" });
+		dispatchCompany({ type: "nameError", value: "" });
+		dispatchCompany({ type: "emailError", value: "" });
+		dispatchCompany({ type: "numOfEmpError", value: "" });
 	};
 
 	return (
 		<form onSubmit={handleSubmit} noValidate>
 			<div className="flex flex-col gap-2">
 				<CompanyTextInput
-					value={state.name.value}
+					value={company.name.value}
 					type="text"
 					placeholder="Company Name Example Kft."
 					label="Name"
-					dispatch={dispatch}
+					dispatchCompany={dispatchCompany}
 					actionType="name"
-					error={state.name.error}
+					error={company.name.error}
 				/>
 				<CompanyTextInput
-					value={state.email.value}
+					value={company.email.value}
 					type="email"
 					placeholder="example@company.com"
 					label="Email"
-					dispatch={dispatch}
+					dispatchCompany={dispatchCompany}
 					actionType="email"
-					error={state.email.error}
+					error={company.email.error}
 				/>
 				<CompanyTextInput
-					value={state.numOfEmp.value}
+					value={company.numOfEmp.value}
 					type="text"
 					placeholder="1 - 100"
 					label="Number of Employees"
-					dispatch={dispatch}
+					dispatchCompany={dispatchCompany}
 					actionType="numOfEmp"
-					error={state.numOfEmp.error}
+					error={company.numOfEmp.error}
 				/>
 				<CompanyTextAreaInput
-					value={state.description.value}
+					value={company.description.value}
 					placeholder="..."
 					label="Description (optional)"
-					dispatch={dispatch}
+					dispatchCompany={dispatchCompany}
 					actionType="description"
 				/>
 			</div>

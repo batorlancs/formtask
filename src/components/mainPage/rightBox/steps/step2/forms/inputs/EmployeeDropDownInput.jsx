@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import DropDownIcon from "../../../../../../../assets/icons/dropDownIcon.svg";
 
+/**
+ * All options of the drop down input
+ */
 const options = [
 	"Accountant",
 	"Software Developer",
@@ -8,10 +11,20 @@ const options = [
 	"Manager",
 ];
 
+/**
+ * This component is a drop down text input for the employee form.
+ */
 const EmployeeDropDownInput = (props) => {
 	const { index, change, employee, changeEmployee } = props;
 
+    /**
+     * Current option selected by the user ("Accountant" by default)
+     */
 	const [currOption, setCurrOption] = useState(employee[change]);
+
+    /**
+     * if dropDown true -> reveal dropdown input 
+     */
 	const [dropDown, setDropDown] = useState(false);
 	const ref = useRef(null);
 
@@ -19,6 +32,11 @@ const EmployeeDropDownInput = (props) => {
 		setDropDown((prev) => !prev);
 	};
 
+    /**
+     * Change the current selected option and store data in the main employees form
+     * 
+     * @param {string} newOption  
+     */
 	const changeCurrOption = (newOption) => {
 		toggleDropDown();
 		// store data in json
@@ -29,7 +47,9 @@ const EmployeeDropDownInput = (props) => {
 		setCurrOption(newOption);
 	};
 
-	// when clicking outside hide drop down
+	/**
+     * This function hides the drop down input when the user clicks somewhere else
+     */
 	useEffect(() => {
 		const handleOutsideClick = (event) => {
 			if (ref.current && !ref.current.contains(event.target)) {

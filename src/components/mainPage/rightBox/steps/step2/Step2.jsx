@@ -6,41 +6,39 @@ import PrevNextButtons from "../sharedComponents/PrevNextButtons";
 const errorMessage =
 	"Handle all errors to continue! Each employee form shows what is the error!";
 
+/**
+ * This component is Step 2, Filling in Employee data of the form
+ */
 const Step2 = (props) => {
 	const {
 		incCurrStepBy,
-		state,
-		dispatch,
+		company,
+		dispatchCompany,
 		employees,
 		changeEmployee,
 		rightBoxRef,
 	} = props;
 
+    /**
+     * Displays error message at the top of the page
+     */
 	const [warning, setWarning] = useState("");
-	const [buttonPressed, setButtonPressed] = useState(false);
 
-	useEffect(() => {
-		if (!buttonPressed) return;
-		for (let i = 0; i < state.numOfEmp.value; i++) {
-			let validationResult = validateForm(i);
-			if (validationResult !== "") {
-				setWarning(errorMessage);
-				break;
-			}
-		}
-	}, []);
-
+    /**
+     * When next button is clicked validate each and every employee form
+     *  -> if no errors: move user to the next step
+     *  -> if validation errors: scroll to the top of the page, and display erros
+     */
 	const handleClick = () => {
-		setButtonPressed(true);
 		let success = true;
-		if (state.numOfEmp.value === "") {
+		if (company.numOfEmp.value === "") {
 			success = false;
-			dispatch({
+			dispatchCompany({
 				type: "numOfEmpError",
 				value: "Provide the number of employees!",
 			});
 		}
-		for (let i = 0; i < state.numOfEmp.value; i++) {
+		for (let i = 0; i < company.numOfEmp.value; i++) {
 			let validationResult = validateForm(i);
 			// change data
 			let temp = { ...employees[i] };
@@ -65,6 +63,12 @@ const Step2 = (props) => {
 		}
 	};
 
+    /**
+     * Validates one employee by the index and returns result of validation
+     * 
+     * @param {number} index index of employee
+     * @returns "" if no errors, returns a message if there is an error
+     */
 	const validateForm = (index) => {
 		let emp = employees[index];
 		if (
@@ -89,10 +93,10 @@ const Step2 = (props) => {
 					type="text"
 					placeholder="1 - 100"
 					label="Number of Employees"
-					dispatch={dispatch}
+					dispatchCompany={dispatchCompany}
 					actionType="numOfEmp"
-					error={state.numOfEmp.error}
-					value={state.numOfEmp.value}
+					error={company.numOfEmp.error}
+					value={company.numOfEmp.value}
 				/>
 				<div
 					className={`${
@@ -114,8 +118,8 @@ const Step2 = (props) => {
 			</div>
 			<div className="mt-12 grid w-full grid-cols-2 gap-6 ">
 				{employees &&
-					employees.length >= state.numOfEmp.value &&
-					Array.from({ length: state.numOfEmp.value }, (_, index) => (
+					employees.length >= company.numOfEmp.value &&
+					Array.from({ length: company.numOfEmp.value }, (_, index) => (
 						<EmployeeForm
 							key={index}
 							index={index}
@@ -123,7 +127,7 @@ const Step2 = (props) => {
 							employee={employees[index]}
 						/>
 					))}
-				{employees && state.numOfEmp.value % 2 === 1 && (
+				{employees && company.numOfEmp.value % 2 === 1 && (
 					<div className="rounded-2xl bg-black bg-opacity-5"></div>
 				)}
 			</div>

@@ -3,7 +3,16 @@ import LoadingAnimation from "../../../../../assets/animations/loading.svg";
 import PrevButton from "./PrevButton";
 import NextButton from "./NextButton";
 
+/**
+ * This component renders a previous and next button based on the passed in props
+ */
 const PrevNextButtons = (props) => {
+    /**
+     * isPrevious -> if true renders previous button
+     * isFinal -> next button displays "Submit" instead of "Next"
+     * handleClick -> function to handle "Next button" click, if handleClick undefined it renders type='submit' button
+     * isLoading -> if Loading render loading icon on next button
+     */
 	const {
 		incCurrStepBy,
 		isPrevious = false,

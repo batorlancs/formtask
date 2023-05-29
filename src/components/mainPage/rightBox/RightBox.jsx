@@ -6,37 +6,49 @@ import Step2 from "./steps/step2/Step2";
 import Step3 from "./steps/step3/Step3";
 import Step4 from "./steps/step4/Step4";
 
-
-const reducer = (state, action) => {
+/**
+ * Reducer function to change the data in the useReducer variable
+ *
+ * @param {*} company useReducer variable
+ * @param {*} action passed in actions to the hook (type, value)
+ */
+const reducer = (company, action) => {
 	switch (action.type) {
 		case "name":
-			return { ...state, name: { value: action.value, error: "" } };
+			return { ...company, name: { value: action.value, error: "" } };
 		case "email":
-			return { ...state, email: { value: action.value, error: "" } };
+			return { ...company, email: { value: action.value, error: "" } };
 		case "numOfEmp":
-			// check if input is a number or would be incorrect input (1-100)
+			// if input is a number or would be incorrect input (1-100) it does not change
 			if (isNaN(action.value) || action.value.includes(" "))
-				return { ...state };
+				return { ...company };
 			let num = parseInt(action.value);
-			if (num > 100 || num < 1) return { ...state };
+			if (num > 100 || num < 1) return { ...company };
 			else
 				return {
-					...state,
+					...company,
 					numOfEmp: { value: action.value, error: "" },
 				};
 		case "description":
-			return { ...state, description: { value: action.value } };
+			return { ...company, description: { value: action.value } };
+		//errors
 		case "nameError":
-			return { ...state, name: { ...state.name, error: action.value } };
+			return {
+				...company,
+				name: { ...company.name, error: action.value },
+			};
 		case "emailError":
-			return { ...state, email: { ...state.email, error: action.value } };
+			return {
+				...company,
+				email: { ...company.email, error: action.value },
+			};
 		case "numOfEmpError":
 			return {
-				...state,
-				numOfEmp: { ...state.numOfEmp, error: action.value },
+				...company,
+				numOfEmp: { ...company.numOfEmp, error: action.value },
 			};
 		default:
-			return state;
+			return company;
 	}
 };
 
@@ -44,10 +56,17 @@ const reducer = (state, action) => {
  * This component handles the form on the right side of the page, and gathers the data here from all of the steps
  */
 const RightBox = (props) => {
-    const { startedForm, toggleStartedForm } = props;
-    const [firebaseID, setFirebaseID] = useState("");
+	const { startedForm, toggleStartedForm } = props;
+	/**
+	 * When object is uploaded the firebase, this will store the id of that document (if empty it has not been stored yet)
+	 */
+	const [firebaseID, setFirebaseID] = useState("");
 
-	const [state, dispatch] = useReducer(reducer, {
+    /**
+     * Company data, for each input --> value, error 
+     * if error is not "", it will display the error under the input
+     */
+	const [company, dispatchCompany] = useReducer(reducer, {
 		name: {
 			value: "",
 			error: "",
@@ -65,6 +84,9 @@ const RightBox = (props) => {
 		},
 	});
 
+    /**
+     * Array of Employee data to store each employee form created
+     */
 	const [employees, setEmployees] = useState([
 		{
 			name: "",
@@ -76,6 +98,11 @@ const RightBox = (props) => {
 		},
 	]);
 
+    /**
+     * This function populates the employees with "empty" values until it reaches the passed length
+     * 
+     * @param {number} length new employees array length
+     */
 	const populateEmployees = (length) => {
 		let employeeData = {
 			name: "",
@@ -90,10 +117,19 @@ const RightBox = (props) => {
 		}
 	};
 
+    /**
+     * Populate employees each time the numOfEmp value changes in companyData
+     */
 	useEffect(() => {
-		populateEmployees(state.numOfEmp.value);
-	}, [state.numOfEmp.value]);
+		populateEmployees(company.numOfEmp.value);
+	}, [company.numOfEmp.value]);
 
+    /**
+     * This function overwrites an employee at the given index to the given object in the employees array
+     * 
+     * @param {number} index the index of employee to overwrite
+     * @param {object} employee new employeeData object to overwrite
+     */
 	const changeEmployee = (index, employee) => {
 		setEmployees((prev) => {
 			let temp = [...prev];
@@ -102,6 +138,9 @@ const RightBox = (props) => {
 		});
 	};
 
+    /**
+     * This variable keeps track of the current Step the user is in when filling in the form
+     */
 	const [currStep, setCurrStep] = useState(1);
 
 	const incCurrStepBy = (num) => {
@@ -110,26 +149,34 @@ const RightBox = (props) => {
 
 	const rightBoxRef = useRef(null);
 
+    /**
+     * Each time the user clicks next or previous (either forwards or backwards) scroll to the top of the component
+     */
 	useEffect(() => {
 		if (rightBoxRef.current)
 			rightBoxRef.current.scrollIntoView({ block: "start" });
 	}, [currStep]);
 
+    /**
+     * This function returns the correct component based on the current step the user is at
+     * 
+     * @returns component based on currStep
+     */
 	const LoadCurrentStep = () => {
 		if (currStep === 1)
 			return (
 				<Step1
 					incCurrStepBy={incCurrStepBy}
-					state={state}
-					dispatch={dispatch}
+					company={company}
+					dispatchCompany={dispatchCompany}
 				/>
 			);
 		else if (currStep === 2)
 			return (
 				<Step2
 					incCurrStepBy={incCurrStepBy}
-					state={state}
-					dispatch={dispatch}
+					company={company}
+					dispatchCompany={dispatchCompany}
 					employees={employees}
 					changeEmployee={changeEmployee}
 					rightBoxRef={rightBoxRef}
@@ -139,13 +186,12 @@ const RightBox = (props) => {
 			return (
 				<Step3
 					incCurrStepBy={incCurrStepBy}
-					state={state}
+					company={company}
 					employees={employees}
 					setFirebaseID={setFirebaseID}
 				/>
 			);
-		else if (currStep === 4)
-			return <Step4 firebaseID={firebaseID} state={state} />;
+		else if (currStep === 4) return <Step4 firebaseID={firebaseID} />;
 	};
 
 	return (

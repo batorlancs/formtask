@@ -1,6 +1,9 @@
 import React from "react";
 import DataRowElement from "./DataRowElement";
 
+/**
+ * Used to convert keys of the object to Label names
+ */
 const alias = {
 	name: "Full Name",
 	email: "Email",
@@ -8,6 +11,9 @@ const alias = {
 	age: "Age",
 };
 
+/**
+ * This component displays the data of one employee in the array in a table
+ */
 const EmployeePreview = (props) => {
 	const { employee, index, numOfEmp } = props;
 

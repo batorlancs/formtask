@@ -1,12 +1,24 @@
 import React, { useState } from "react";
 import CheckIcon from "../../../../../../../assets/icons/checkIcon.svg";
 
+/**
+ * This component is a file input for the employee form.
+ */
 const EmployeeFileInput = (props) => {
 	const { index, change, employee, changeEmployee } = props;
 
+    /**
+     * Inputted file by the user (null by default)
+     */
 	const [file, setFile] = useState(employee[change]);
+    /**
+     * Hovering will display the file name if file not null
+     */
 	const [isHover, setIsHover] = useState(false);
 
+    /**
+     * When inputting a new file, save the data in the main form
+     */
 	const handleFileChange = (event) => {
 		const f = event.target.files[0];
 

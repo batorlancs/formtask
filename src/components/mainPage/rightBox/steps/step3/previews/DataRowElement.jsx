@@ -1,5 +1,9 @@
 import React from "react";
 
+/**
+ * This component is displays one row of data (2 columns)
+ * -> title (object key), value
+ */
 const DataRowElement = (props) => {
 	const { title, value } = props;
 

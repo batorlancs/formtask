@@ -2,11 +2,17 @@ import React from "react";
 import Lottie from "lottie-react";
 import animationData from "../../../../../assets/animations/lottie-post.json";
 
+/**
+ * Style for Lottie animation
+ */
 const animStyle = {
 	height: 300,
 	width: 300,
 };
 
+/**
+ * This component displays when opening the page at first, to let user start filling in the form
+ */
 export const GetStarted = (props) => {
 	const { toggleStartedForm } = props;
 

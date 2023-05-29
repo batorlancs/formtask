@@ -1,6 +1,17 @@
 import React from "react";
 
+/**
+ * This component is a text input for the employee form.
+ */
 const EmployeeTextInput = (props) => {
+    /**
+     * index -> index in employees array
+     * change -> name of the atribute to be changed in the employees
+     * employee -> employee objects at employees[index]
+     * changeEmployee -> function to overwrite employees array with object
+     * type -> type of input
+     * placeholder
+     */
 	const {
 		index,
 		change,
@@ -8,9 +19,11 @@ const EmployeeTextInput = (props) => {
 		changeEmployee,
 		type,
 		placeholder,
-		error,
 	} = props;
 
+    /**
+     * when user is inputting, save data and remove error from employee form
+     */
 	const handleChange = (value) => {
 		let temp = { ...employee };
 		temp[change] = value;
@@ -19,24 +32,15 @@ const EmployeeTextInput = (props) => {
 	};
 
 	return (
-		<div className="">
-			<input
-				value={employee && employee[change]}
-				type={type}
-				placeholder={placeholder}
-				onChange={(event) => {
-					handleChange(event.target.value);
-				}}
-				className={`${
-					error !== ""
-						? "bg-red-500 bg-opacity-20"
-						: "bg-black bg-opacity-5"
-				}  w-full rounded-2xl px-4 py-3 placeholder:text-black placeholder:text-opacity-30`}
-			></input>
-			{error !== "" && (
-				<p className="float-right mt-2 text-red-500">{error}</p>
-			)}
-		</div>
+        <input
+            value={employee && employee[change]}
+            type={type}
+            placeholder={placeholder}
+            onChange={(event) => {
+                handleChange(event.target.value);
+            }}
+            className="bg-black bg-opacity-5 w-full rounded-2xl px-4 py-3 placeholder:text-black placeholder:text-opacity-30"
+        ></input>
 	);
 };
 

@@ -1,5 +1,10 @@
 import React from "react";
 
+/**
+ * Next Button
+ * -> render type="submit" button if handleClick is undefined
+ * -> render normal button calling handleClick if handleClick is defined
+ */
 const NextButton = (props) => {
 	const { isFinal, handleClick } = props;
 

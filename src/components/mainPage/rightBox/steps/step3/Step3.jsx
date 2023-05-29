@@ -6,23 +6,37 @@ import { db, storage } from "../../../../../firebase";
 import { collection, doc, addDoc, setDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
+/**
+ * This component is Step 3, Verifying and Uploading all forms
+ * --> this component displays all data in a simpe form
+ *          --> company data, and each employee data
+ */
 const Step3 = (props) => {
-	const { incCurrStepBy, state, employees, setFirebaseID } = props;
+	const { incCurrStepBy, company, employees, setFirebaseID } = props;
+
+    /**
+     * Animation for next button (loading when uploading to firebase)
+     */
 	const [isLoading, setIsLoading] = useState(false);
 
+    /**
+     * When clicking submit, upload all data including company form, all employee forms in the array to firebase
+     * --> PDF files (CV) is uploaded to firebase storage and is referenced in firestore by its link
+     */
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		setIsLoading(true);
 
-		// send data to firebase
+		// send company data to firebase
 		const companyRef = await addDoc(collection(db, "companies"), {
-			name: state.name.value,
-			email: state.email.value,
-			numOfEmp: state.numOfEmp.value,
-			description: state.description.value,
+			name: company.name.value,
+			email: company.email.value,
+			numOfEmp: company.numOfEmp.value,
+			description: company.description.value,
 		});
 
-		for (let index = 0; index < state.numOfEmp.value; index++) {
+        // send each employee data as a subcollection to company document
+		for (let index = 0; index < company.numOfEmp.value; index++) {
 			await uploadEmployee(companyRef, index);
 		}
 
@@ -32,6 +46,13 @@ const Step3 = (props) => {
 		incCurrStepBy(1);
 	};
 
+    /**
+     * upload one employee by the id of "index" to the referenced company document
+     * 
+     * @param {object} companyRef reference of document in firebase
+     * @param {number} index index of employee in array
+     * @returns 
+     */
 	const uploadEmployee = async (companyRef, index) => {
 		return new Promise((resolve) => {
 			// upload file to firebase storage
@@ -60,17 +81,21 @@ const Step3 = (props) => {
 								CV: url,
 							})
 								.then(() => {
+                                    // employee has been uploaded
 									resolve();
 								})
 								.catch(() => {
+                                    console.log("an error occured uploading to firebase");
 									setIsLoading(false);
 								});
 						})
 						.catch(() => {
+                            console.log("an error occured uploading to firebase");
 							setIsLoading(false);
 						});
 				})
 				.catch(() => {
+                    console.log("an error occured uploading to firebase");
 					setIsLoading(false);
 				});
 		});
@@ -81,19 +106,19 @@ const Step3 = (props) => {
 			<h1 className="mb-6 rounded-2xl bg-custom-purple bg-opacity-70 px-8 py-4 text-2xl font-bold text-white">
 				Company Details
 			</h1>
-			<CompanyPreview state={state} />
+			<CompanyPreview company={company} />
 			<h1 className="mt-6 rounded-2xl bg-custom-blue-dark bg-opacity-70 px-8 py-4 text-2xl font-bold text-white">
 				Employee Details
 			</h1>
 			<div className="mt-6 grid grid-cols-1 gap-6">
 				{employees
-					.slice(0, state.numOfEmp.value)
+					.slice(0, company.numOfEmp.value)
 					.map((employee, index) => (
 						<EmployeePreview
 							key={index}
 							employee={employee}
 							index={index}
-							numOfEmp={state.numOfEmp.value}
+							numOfEmp={company.numOfEmp.value}
 						/>
 					))}
 			</div>

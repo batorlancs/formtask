@@ -3,6 +3,9 @@ import EmployeeTextInput from "./inputs/EmployeeTextInput";
 import EmployeeDropDownInput from "./inputs/EmployeeDropDownInput";
 import EmployeeFileInput from "./inputs/EmployeeFileInput";
 
+/**
+ * This component is an Employee Form that stores form data in the employees array at index
+ */
 const EmployeeForm = (props) => {
 	const { index, employee, changeEmployee } = props;
 
@@ -41,7 +44,6 @@ const EmployeeForm = (props) => {
 					changeEmployee={changeEmployee}
 					type="text"
 					placeholder="Full Name"
-					error=""
 				/>
 				<EmployeeTextInput
 					index={index}
@@ -50,7 +52,6 @@ const EmployeeForm = (props) => {
 					changeEmployee={changeEmployee}
 					type="email"
 					placeholder="Email"
-					error=""
 				/>
 				<EmployeeDropDownInput
 					index={index}
@@ -66,7 +67,6 @@ const EmployeeForm = (props) => {
 						changeEmployee={changeEmployee}
 						type="number"
 						placeholder="Age"
-						error=""
 					/>
 					<EmployeeFileInput
 						index={index}

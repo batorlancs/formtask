@@ -6,7 +6,6 @@ import LoadingAnimation from "../../../../../assets/animations/loading.svg";
 /**
  * This component is Step 4 of the form process, which gives an oppurtonity fetch the uploaded data from the firebase cloud.
  *
- * @param {*} props firebaseID
  */
 const Step4 = (props) => {
 	const { firebaseID } = props;
@@ -15,8 +14,6 @@ const Step4 = (props) => {
 
 	/**
 	 * This function handles the download click, connects and fetches data from firebase and converts it into an object
-	 *
-	 * @returns
 	 */
 	const handleClick = async () => {
 		setIsLoading(true);

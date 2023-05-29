@@ -1,5 +1,8 @@
 import React from "react";
 
+/**
+ * Previous Button
+ */
 const PrevButton = (props) => {
 	const { incCurrStepBy } = props;
 

@@ -1,8 +1,29 @@
 import React from "react";
 
+/**
+ * This component is text input in the company form
+ *  -> on each change, it saves changes to company
+ */
 const CompanyTextInput = (props) => {
-	const { value, type, placeholder, label, dispatch, actionType, error } =
-		props;
+
+    /**
+     * value -> value of input field
+     * type -> type of input field
+     * placeholder
+     * label -> display text above the input field
+     * dispatchCompany -> save changes to company form
+     * actionType -> what type of action to call for dispatchCompany
+     * error -> validation result
+     */
+	const {
+		value,
+		type,
+		placeholder,
+		label,
+		dispatchCompany,
+		actionType,
+		error,
+	} = props;
 
 	return (
 		<div className="">
@@ -13,7 +34,10 @@ const CompanyTextInput = (props) => {
 				inputMode={type === "number" ? "numeric" : ""}
 				placeholder={placeholder}
 				onChange={(e) => {
-					dispatch({ type: actionType, value: e.target.value });
+					dispatchCompany({
+						type: actionType,
+						value: e.target.value,
+					});
 				}}
 				className={`${
 					error !== ""
