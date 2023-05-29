@@ -6,6 +6,7 @@ import Step2 from "./steps/step2/Step2";
 import Step3 from "./steps/step3/Step3";
 import Step4 from "./steps/step4/Step4";
 
+
 const reducer = (state, action) => {
 	switch (action.type) {
 		case "name":
@@ -39,37 +40,24 @@ const reducer = (state, action) => {
 	}
 };
 
+/**
+ * This component handles the form on the right side of the page, and gathers the data here from all of the steps
+ */
 const RightBox = (props) => {
-	// const [state, dispatch] = useReducer(reducer, {
-	// 	name: {
-	// 		value: "",
-	// 		error: "",
-	// 	},
-	// 	email: {
-	// 		value: "",
-	// 		error: "",
-	// 	},
-	// 	numOfEmp: {
-	// 		value: "",
-	// 		error: "",
-	// 	},
-	// 	description: {
-	// 		value: "",
-	// 	},
-	// });
+    const { startedForm, toggleStartedForm } = props;
+    const [firebaseID, setFirebaseID] = useState("");
 
-	// dev resources
 	const [state, dispatch] = useReducer(reducer, {
 		name: {
-			value: "dev",
+			value: "",
 			error: "",
 		},
 		email: {
-			value: "dev@dev.com",
+			value: "",
 			error: "",
 		},
 		numOfEmp: {
-			value: "1",
+			value: "",
 			error: "",
 		},
 		description: {
@@ -87,8 +75,6 @@ const RightBox = (props) => {
 			error: "",
 		},
 	]);
-
-	const [firebaseID, setFirebaseID] = useState("");
 
 	const populateEmployees = (length) => {
 		let employeeData = {
@@ -122,12 +108,12 @@ const RightBox = (props) => {
 		setCurrStep((prev) => prev + num);
 	};
 
-    const rightBoxRef = useRef(null);
+	const rightBoxRef = useRef(null);
 
-    useEffect(() => {
-        if (rightBoxRef.current)
-            rightBoxRef.current.scrollIntoView({ block: 'start' });
-    }, [currStep])
+	useEffect(() => {
+		if (rightBoxRef.current)
+			rightBoxRef.current.scrollIntoView({ block: "start" });
+	}, [currStep]);
 
 	const LoadCurrentStep = () => {
 		if (currStep === 1)
@@ -146,7 +132,7 @@ const RightBox = (props) => {
 					dispatch={dispatch}
 					employees={employees}
 					changeEmployee={changeEmployee}
-                    rightBoxRef={rightBoxRef}
+					rightBoxRef={rightBoxRef}
 				/>
 			);
 		else if (currStep === 3)
@@ -160,24 +146,25 @@ const RightBox = (props) => {
 			);
 		else if (currStep === 4)
 			return <Step4 firebaseID={firebaseID} state={state} />;
-
 	};
 
 	return (
 		<div
-            
 			className={`${
-				props.startedForm ? "w-[60%]" : "w-[40%]"
-			} h-full bg-neutral-100 duration-1000 flex items-start justify-center overflow-scroll overflow-x-hidden`}
+				props.startedForm ? "w-[60%]" : "w-[50%]"
+			} flex h-full items-start justify-center overflow-scroll overflow-x-hidden bg-neutral-100 duration-1000`}
 		>
-			<div className={`pt-32 px-20 max-w-[800px] w-full`} ref={rightBoxRef}>
-				{props.startedForm ? (
+			<div
+				className={`w-full max-w-[800px] px-20 pt-32`}
+				ref={rightBoxRef}
+			>
+				{startedForm ? (
 					<>
 						<StepTitle currStep={currStep} />
 						{LoadCurrentStep()}
 					</>
 				) : (
-					<GetStarted toggleStartedForm={props.toggleStartedForm} />
+					<GetStarted toggleStartedForm={toggleStartedForm} />
 				)}
 			</div>
 		</div>

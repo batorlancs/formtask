@@ -3,13 +3,23 @@ import { db } from "../../../../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import LoadingAnimation from "../../../../../assets/animations/loading.svg";
 
+/**
+ * This component is Step 4 of the form process, which gives an oppurtonity fetch the uploaded data from the firebase cloud.
+ *
+ * @param {*} props firebaseID
+ */
 const Step4 = (props) => {
 	const { firebaseID } = props;
 	const [isLoading, setIsLoading] = useState(false);
 	const linkRef = useRef(null);
 
+	/**
+	 * This function handles the download click, connects and fetches data from firebase and converts it into an object
+	 *
+	 * @returns
+	 */
 	const handleClick = async () => {
-        setIsLoading(true);
+		setIsLoading(true);
 		let result = {};
 		let employees = [];
 		const companyRef = doc(db, "companies", firebaseID);
@@ -34,11 +44,16 @@ const Step4 = (props) => {
 			employees: employees,
 		};
 
-		// console.log(result);
+		console.log(result);
 		downloadJson(result);
-        setIsLoading(false);
+		setIsLoading(false);
 	};
 
+	/**
+	 * This function takes an object and downloads it for the user in JSON
+	 *
+	 * @param {object} JsonData fetched data from firebase to download
+	 */
 	const downloadJson = (JsonData) => {
 		const data = JSON.stringify(JsonData);
 		const blob = new Blob([data], { type: "application/json" });
@@ -53,7 +68,7 @@ const Step4 = (props) => {
 
 	return (
 		<div>
-			<div className="font-bold text-3xl">
+			<div className="text-3xl font-bold">
 				Thank you for your submission!
 			</div>
 			<p className="mt-6 text-lg">
@@ -64,11 +79,17 @@ const Step4 = (props) => {
 				form!
 			</p>
 			<button
-				className="bg-custom-blue-dark text-white w-[250px] h-14 font-bold rounded-2xl mt-12 flex items-center justify-center"
+				className="mt-12 flex h-14 w-[250px] items-center justify-center rounded-2xl bg-custom-blue-dark font-bold text-white"
 				onClick={handleClick}
 			>
-				{!isLoading && "Download Data in JSON"}
-                <img src={LoadingAnimation} className={`${!isLoading && "hidden"} invert h-8 opacity-60`}></img>
+				{isLoading ? (
+					<img
+						src={LoadingAnimation}
+						className="h-8 opacity-60 invert"
+					></img>
+				) : (
+					"Download Data in JSON"
+				)}
 			</button>
 			<a className="hidden" ref={linkRef}></a>
 		</div>

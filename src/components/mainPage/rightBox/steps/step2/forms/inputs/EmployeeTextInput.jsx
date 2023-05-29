@@ -3,7 +3,7 @@ import React from "react";
 const EmployeeTextInput = (props) => {
 	const {
 		index,
-        change,
+		change,
 		employee,
 		changeEmployee,
 		type,
@@ -14,14 +14,14 @@ const EmployeeTextInput = (props) => {
 	const handleChange = (value) => {
 		let temp = { ...employee };
 		temp[change] = value;
-        temp["error"] = "";
+		temp["error"] = "";
 		changeEmployee(index, temp);
 	};
 
 	return (
 		<div className="">
 			<input
-                value={employee && employee[change]}
+				value={employee && employee[change]}
 				type={type}
 				placeholder={placeholder}
 				onChange={(event) => {
@@ -31,10 +31,10 @@ const EmployeeTextInput = (props) => {
 					error !== ""
 						? "bg-red-500 bg-opacity-20"
 						: "bg-black bg-opacity-5"
-				}  w-full rounded-2xl px-8 py-3 text-lg placeholder:text-black placeholder:text-opacity-30`}
+				}  w-full rounded-2xl px-4 py-3 placeholder:text-black placeholder:text-opacity-30`}
 			></input>
 			{error !== "" && (
-				<p className="text-red-500 mt-2 float-right">{error}</p>
+				<p className="float-right mt-2 text-red-500">{error}</p>
 			)}
 		</div>
 	);

@@ -11,14 +11,14 @@ const EmployeeFileInput = (props) => {
 		const f = event.target.files[0];
 
 		if (f && f.type === "application/pdf") {
-            // save data
-            let temp = { ...employee };
-            temp[change] = f;
-            temp["error"] = "";
-            changeEmployee(index, temp);
-            //
+			// save data
+			let temp = { ...employee };
+			temp[change] = f;
+			temp["error"] = "";
+			changeEmployee(index, temp);
+			//
 			setFile(f);
-            setIsHover(false);
+			setIsHover(false);
 		} else {
 			alert("Please select a PDF file!");
 		}
@@ -36,26 +36,29 @@ const EmployeeFileInput = (props) => {
 			<label
 				onMouseEnter={handleMouseEnter}
 				onMouseLeave={handleMouseLeave}
-				className="w-full h-full bg-black bg-opacity-10 rounded-2xl flex items-center justify-center cursor-pointer px-4 overflow-hidden"
+				className="flex h-full w-full cursor-pointer items-center justify-center overflow-hidden rounded-2xl bg-black bg-opacity-10 px-4"
 			>
 				{file ? (
 					<div className="flex flex-row items-center justify-center gap-2">
-                        <p>CV</p>
-                        <img src={CheckIcon} className="h-6"></img>
-                    </div>
+						<p>CV</p>
+						<img src={CheckIcon} className="h-6"></img>
+					</div>
 				) : (
 					<p className="">Import CV</p>
 				)}
 				<input
 					type="file"
-					className="hidden w-full h-full"
+					className="hidden h-full w-full"
 					onChange={handleFileChange}
 					accept=".pdf"
 				></input>
 			</label>
 			{isHover && file && (
-				<div className="absolute top-16 bg-black bg-opacity-5 backdrop-blur-xl py-4 px-4 text-xs rounded-2xl whitespace-nowrap">
-					{file ? file.name : "Select .pdf file"}
+				<div>
+					<div className="ml-10 mt-1 h-0 w-0 border-x-[20px] border-b-[20px] border-white border-x-transparent"></div>
+					<div className="absolute top-16 whitespace-nowrap rounded-2xl bg-white px-4 py-3 text-xs shadow-xl backdrop-blur-xl">
+						{file ? file.name : "Select .pdf file"}
+					</div>
 				</div>
 			)}
 		</div>

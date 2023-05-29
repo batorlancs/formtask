@@ -13,19 +13,19 @@ const EmployeePreview = (props) => {
 
 	return (
 		<div>
-			<div className="bg-black bg-opacity-5 rounded-2xl">
-				<h1 className="text-xl px-8 py-3 font-bold rounded-t-2xl bg-black bg-opacity-5">
-					<span className="text-custom-blue-dark">{index + 1}</span> / {numOfEmp}
+			<div className="rounded-2xl bg-black bg-opacity-5">
+				<h1 className="rounded-t-2xl bg-black bg-opacity-5 px-8 py-3 text-xl font-bold">
+					<span className="text-custom-blue-dark">{index + 1}</span> /{" "}
+					{numOfEmp}
 				</h1>
-				<div className="px-8 pt-4 pb-6">
+				<div className="px-8 pb-6 pt-4">
 					{Object.keys(employee).map((key) => {
-
-                        if (key === "error") return;
+						if (key === "error") return;
 
 						if (key === "CV") {
 							return (
 								<DataRowElement
-                                    key={key}
+									key={key}
 									title="CV"
 									value={
 										employee[key]
@@ -36,15 +36,13 @@ const EmployeePreview = (props) => {
 							);
 						}
 
-						
-                        return (
-                            <DataRowElement
-                                key={key}
-                                title={alias[key]}
-                                value={employee[key]}
-                            />
-                        );
-
+						return (
+							<DataRowElement
+								key={key}
+								title={alias[key]}
+								value={employee[key]}
+							/>
+						);
 					})}
 				</div>
 			</div>

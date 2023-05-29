@@ -42,7 +42,7 @@ const Step3 = (props) => {
 			);
 			uploadBytes(fileRef, file)
 				.then((fileSnap) => {
-                    // get url of uploaded file
+					// get url of uploaded file
 					getDownloadURL(fileSnap.ref)
 						.then((url) => {
 							// upload each employee to the employees collection within the uploaded company
@@ -78,14 +78,14 @@ const Step3 = (props) => {
 
 	return (
 		<form onSubmit={handleSubmit} className="w-full">
-			<h1 className="text-2xl px-8 py-4 mb-6 font-bold rounded-2xl bg-custom-blue-dark bg-opacity-70 text-white">
+			<h1 className="mb-6 rounded-2xl bg-custom-purple bg-opacity-70 px-8 py-4 text-2xl font-bold text-white">
 				Company Details
 			</h1>
 			<CompanyPreview state={state} />
-			<h1 className="text-2xl px-8 py-4 mt-6 font-bold rounded-2xl bg-custom-blue-dark bg-opacity-70 text-white">
+			<h1 className="mt-6 rounded-2xl bg-custom-blue-dark bg-opacity-70 px-8 py-4 text-2xl font-bold text-white">
 				Employee Details
 			</h1>
-			<div className="grid grid-cols-1 gap-6 mt-6">
+			<div className="mt-6 grid grid-cols-1 gap-6">
 				{employees
 					.slice(0, state.numOfEmp.value)
 					.map((employee, index) => (

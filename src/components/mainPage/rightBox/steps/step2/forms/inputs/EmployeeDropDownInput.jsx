@@ -21,11 +21,11 @@ const EmployeeDropDownInput = (props) => {
 
 	const changeCurrOption = (newOption) => {
 		toggleDropDown();
-        // store data in json
-        let temp = { ...employee };
-        temp[change] = newOption;
-        changeEmployee(index, temp);
-        //
+		// store data in json
+		let temp = { ...employee };
+		temp[change] = newOption;
+		changeEmployee(index, temp);
+		//
 		setCurrOption(newOption);
 	};
 
@@ -49,20 +49,20 @@ const EmployeeDropDownInput = (props) => {
 			<div className="relative">
 				<button
 					onClick={toggleDropDown}
-					className="w-full py-4 px-8 rounded-2xl bg-black bg-opacity-5 flex flex-row justify-between cursor-pointer"
+					className="flex w-full cursor-pointer flex-row justify-between rounded-2xl bg-black bg-opacity-5 px-4 py-3"
 				>
 					<p>{currOption}</p>
 					<img
-						className={`bg-black bg-opacity-10 rounded-full h-6 duration-500`}
+						className={`h-6 rounded-full bg-black bg-opacity-10 duration-500`}
 						src={DropDownIcon}
 					></img>
 				</button>
 				{dropDown && (
-					<ul className="absolute z-10 top-[70px] bg-black bg-opacity-5 backdrop-blur-xl w-full p-4 rounded-2xl">
+					<ul className="absolute top-[0px] z-10 w-full rounded-2xl bg-white p-4 shadow-xl backdrop-blur-xl">
 						{options.map((item) => (
 							<li
 								key={item}
-								className="py-3 px-4 opacity-40 hover:bg-black hover:bg-opacity-5 hover:opacity-100 cursor-pointer rounded-2xl"
+								className="cursor-pointer rounded-2xl px-4 py-3 opacity-40 hover:bg-black hover:bg-opacity-5 hover:opacity-100"
 								onClick={() => {
 									changeCurrOption(item);
 								}}

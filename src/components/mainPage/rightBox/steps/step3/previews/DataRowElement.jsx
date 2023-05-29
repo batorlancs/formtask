@@ -6,7 +6,9 @@ const DataRowElement = (props) => {
 	return (
 		<div className="grid grid-cols-2 text-lg ">
 			<h2 className="font-bold">{title}:</h2>
-			<p className="overflow-hidden text-ellipsis">{value === "" ? "-" : value}</p>
+			<p className="overflow-hidden text-ellipsis">
+				{value === "" ? "-" : value}
+			</p>
 		</div>
 	);
 };

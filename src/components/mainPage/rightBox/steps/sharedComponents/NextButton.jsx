@@ -8,7 +8,7 @@ const NextButton = (props) => {
 			{typeof handleClick === "undefined" ? (
 				<button
 					type="submit"
-					className="w-full rounded-2xl bg-custom-blue-dark font-bold text-white flex items-center justify-center"
+					className="flex w-full items-center justify-center rounded-2xl bg-custom-blue-dark font-bold text-white"
 				>
 					{isFinal === true ? "Submit" : "Next"}
 				</button>

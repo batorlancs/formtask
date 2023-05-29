@@ -12,28 +12,28 @@ const EmployeeForm = (props) => {
 				employee.error === ""
 					? "bg-black bg-opacity-5"
 					: "bg-red-500 bg-opacity-10"
-			} w-full min-h-32 rounded-2xl p-6`}
+			} min-h-32 w-full rounded-2xl p-6`}
 		>
-			<div className="flex flex-row gap-4 items-center justify-start mb-6">
+			<div className="mb-6 flex flex-row items-center justify-start gap-4">
 				<div
 					className={`${
 						employee.error === ""
-							? "text-custom-blue-dark bg-custom-blue-light bg-opacity-30"
-							: "text-red-500 bg-red-500 bg-opacity-20"
-					} font-bold text-xl h-10 w-10 rounded-full flex items-center justify-center`}
+							? "bg-custom-blue-light bg-opacity-30 text-custom-blue-dark"
+							: "bg-red-500 bg-opacity-20 text-red-500"
+					} flex h-10 w-10 items-center justify-center rounded-full text-xl font-bold`}
 				>
 					{props.index + 1}
 				</div>
 				<div className="flex flex-col items-start justify-center">
-					<h1 className="font-bold text-xl">Employee</h1>
+					<h1 className="text-xl font-bold">Employee</h1>
 					{employee.error !== "" && (
-						<p className=" text-sm text-red-600 -mt-1">
+						<p className=" -mt-1 text-sm text-red-600">
 							{employee.error}
 						</p>
 					)}
 				</div>
 			</div>
-			<div className="w-full flex flex-col gap-4">
+			<div className="flex w-full flex-col gap-4">
 				<EmployeeTextInput
 					index={index}
 					change="name"
@@ -58,7 +58,7 @@ const EmployeeForm = (props) => {
 					employee={employee}
 					changeEmployee={changeEmployee}
 				/>
-				<div className="w-full grid grid-cols-2 gap-4">
+				<div className="grid w-full grid-cols-2 gap-4">
 					<EmployeeTextInput
 						index={index}
 						change="age"

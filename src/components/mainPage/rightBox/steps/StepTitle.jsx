@@ -1,5 +1,8 @@
 import React from "react";
 
+/**
+ *  This variable contains the name of each step.
+ */
 const stepTitles = [
 	"Get Started",
 	"Company Details",
@@ -9,26 +12,32 @@ const stepTitles = [
 ];
 const totalNumOfSteps = 4;
 
-const StepTitle = ({ currStep }) => {
+/**
+ * This component displays the name of the current step and how many steps in is the user from total number of steps
+ */
+const StepTitle = (props) => {
+	const { currStep } = props;
 
 	return (
-		<div className="w-full mb-12">
-			<h1 className="text-3xl font-bold mb-4">
-				{stepTitles[currStep]}
-			</h1>
-			<div className="w-full h-3 flex flex-row gap-2 justify-between">
+		<div className="mb-12 w-full">
+			<h1 className="mb-4 text-3xl font-bold">{stepTitles[currStep]}</h1>
+			<div className="flex h-3 w-full flex-row justify-between gap-2">
 				{[...Array(currStep)].map((e, i) => (
 					<div
 						key={i}
-						className="w-full h-full bg-custom-blue-dark rounded-full"
+						className="h-full w-full rounded-full bg-custom-blue-dark"
 					></div>
 				))}
-				{(currStep < totalNumOfSteps) && [...Array(totalNumOfSteps - currStep)].map((e, i) => (
-					<div
-						key={i}
-						className="w-full h-full bg-black bg-opacity-5 rounded-full"
-					></div>
-				))}
+				{/**
+				 * Do not display anything if currStep reached totalNumOfSteps
+				 */}
+				{currStep < totalNumOfSteps &&
+					[...Array(totalNumOfSteps - currStep)].map((e, i) => (
+						<div
+							key={i}
+							className="h-full w-full rounded-full bg-black bg-opacity-5"
+						></div>
+					))}
 			</div>
 		</div>
 	);

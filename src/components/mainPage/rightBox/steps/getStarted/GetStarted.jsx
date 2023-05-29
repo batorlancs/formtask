@@ -11,19 +11,19 @@ export const GetStarted = (props) => {
 	const { toggleStartedForm } = props;
 
 	return (
-		<div className="bg-black bg-opacity-5 rounded-2xl flex flex-row pl-12 items-center">
+		<div className="flex flex-row items-center overflow-hidden rounded-2xl bg-black bg-opacity-5 py-12 pl-12">
 			<div>
-				<h2 className="text-3xl mt-6">
-					Click here to fill out our form!
+				<h2 className="mt-6 text-3xl">
+					Click here to fill in our form!
 				</h2>
 				<button
-					className="px-12 py-4 bg-custom-blue-dark font-bold text-lg text-white rounded-2xl mt-6"
+					className="mt-6 whitespace-nowrap rounded-2xl bg-custom-blue-dark px-12 py-4 text-lg font-bold text-white"
 					onClick={toggleStartedForm}
 				>
 					Get Started
 				</button>
 			</div>
-            <div className="">
+			<div className="">
 				<Lottie animationData={animationData} style={animStyle} />
 			</div>
 		</div>

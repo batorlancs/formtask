@@ -3,28 +3,43 @@ import CompanyTextInput from "../step1/inputs/CompanyTextInput";
 import EmployeeForm from "./forms/EmployeeForm";
 import PrevNextButtons from "../sharedComponents/PrevNextButtons";
 
-const errorMessage = "Handle all errors to continue! Each employee form shows what is the error!";
+const errorMessage =
+	"Handle all errors to continue! Each employee form shows what is the error!";
 
 const Step2 = (props) => {
-	const { incCurrStepBy, state, dispatch, employees, changeEmployee, rightBoxRef } = props;
+	const {
+		incCurrStepBy,
+		state,
+		dispatch,
+		employees,
+		changeEmployee,
+		rightBoxRef,
+	} = props;
 
 	const [warning, setWarning] = useState("");
-    const [buttonPressed, setButtonPressed] = useState(false);
+	const [buttonPressed, setButtonPressed] = useState(false);
 
-    useEffect(() => {
-        if (!buttonPressed) return;
-        for (let i = 0; i < state.numOfEmp.value; i++) {
+	useEffect(() => {
+		if (!buttonPressed) return;
+		for (let i = 0; i < state.numOfEmp.value; i++) {
 			let validationResult = validateForm(i);
 			if (validationResult !== "") {
 				setWarning(errorMessage);
-                break;
+				break;
 			}
 		}
-    }, [])
+	}, []);
 
 	const handleClick = () => {
-        setButtonPressed(true);
+		setButtonPressed(true);
 		let success = true;
+		if (state.numOfEmp.value === "") {
+			success = false;
+			dispatch({
+				type: "numOfEmpError",
+				value: "Provide the number of employees!",
+			});
+		}
 		for (let i = 0; i < state.numOfEmp.value; i++) {
 			let validationResult = validateForm(i);
 			// change data
@@ -40,11 +55,14 @@ const Step2 = (props) => {
 		if (success) {
 			incCurrStepBy(1);
 		} else {
-            if (rightBoxRef.current) {
-                rightBoxRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-            setWarning(errorMessage);
-        }
+			if (rightBoxRef.current) {
+				rightBoxRef.current.scrollIntoView({
+					behavior: "smooth",
+					block: "start",
+				});
+			}
+			setWarning(errorMessage);
+		}
 	};
 
 	const validateForm = (index) => {
@@ -76,13 +94,25 @@ const Step2 = (props) => {
 					error={state.numOfEmp.error}
 					value={state.numOfEmp.value}
 				/>
-				<div className={`${warning !== "" ? "bg-red-500 border-red-500" : "bg-orange-500 border-orange-500"} border-[3px] border-opacity-40 px-8 bg-opacity-10 rounded-2xl flex items-center`}>
-					<p className={`${warning !== "" ? "text-red-500" : "text-orange-500"} opacity-80 text-sm font-bold`}>
-						{warning !== "" ? warning : "Please make sure you fill out all employee forms and each field inside."}
+				<div
+					className={`${
+						warning !== ""
+							? "border-red-500 bg-red-500"
+							: "border-orange-500 bg-orange-500"
+					} flex items-center rounded-2xl border-[3px] border-opacity-40 bg-opacity-10 px-8`}
+				>
+					<p
+						className={`${
+							warning !== "" ? "text-red-500" : "text-orange-500"
+						} text-sm font-bold opacity-80`}
+					>
+						{warning !== ""
+							? warning
+							: "Please make sure you fill out all employee forms and each field inside."}
 					</p>
 				</div>
 			</div>
-			<div className="w-full mt-12 grid grid-cols-2 gap-6 ">
+			<div className="mt-12 grid w-full grid-cols-2 gap-6 ">
 				{employees &&
 					employees.length >= state.numOfEmp.value &&
 					Array.from({ length: state.numOfEmp.value }, (_, index) => (
@@ -94,7 +124,7 @@ const Step2 = (props) => {
 						/>
 					))}
 				{employees && state.numOfEmp.value % 2 === 1 && (
-					<div className="bg-black bg-opacity-5 rounded-2xl"></div>
+					<div className="rounded-2xl bg-black bg-opacity-5"></div>
 				)}
 			</div>
 			<PrevNextButtons
