@@ -8,21 +8,21 @@ This web application is built in javascript and react using Vite. The backend us
 The website allows users to add data to the firebase cloud database by filling out this form with the correct details.
 
 ## The Form Filling Process
-Users have to go through four steps to be able to successfuly upload details to the cloud. These four steps are:
+Users have to go through four steps to be able to successfully upload details to the cloud. These four steps are:
 
 1. Getting Started
 2. Filling out Company Data Form
-3. Fillinf out Employee Data Forms
+3. Filling out Employee Data Forms
 4. Verifying and Submitting
 
 In each step there will be some validations to make sure the users is inputting correct data. When the data has been uploaded successfully the user has the option to get the data from firebase and download it as a JSON.
-This is the only way to check how you details have been uploaded to the backend. If you leave this page you will not have access to your data anymore.
+This is the only way to check your data in the backend. If you leave the page you will not have access to the data anymore.
 
 ## Company Form Implementation
 The company form is checking for errors in all three required fields, and will give a very specific instructions under the incorrect input.
-The algorithm will always only display the first input, where the error occurs, this way the user has to think about resolving one error at once.
+The algorithm will always only display the first input where the error occurs, this way, the user has to resolve only a single error at once.
 
-Using a the useReducer hook allowed me to store all values and errors in one object, that are all changable with a single function.
+Using the useReducer hook allowed me to store all values and errors in one object, that are all changable with a single function.
 
 ```
 const [company, dispatchCompany] = useReducer(reducer, {
@@ -45,8 +45,10 @@ const [company, dispatchCompany] = useReducer(reducer, {
 ```
 
 ## Employee Form Implementation
-The employee forms are dynamically changable in number, however, they will always keep their values no matter how much you this number is changed.
+The employee forms are dynamically changable in number, however, they will always keep their values no matter how much you this number has changed.
 When inputting the number, the array is always populated never depopulated.
+
+This allows users not to lose any employee data due to a misstype or something of that sort.
 
 ```
 const populateEmployees = (length) => {
@@ -65,7 +67,7 @@ const populateEmployees = (length) => {
 ```
 
 ## Sending data to Firebase & Handling PDF Files
-When uploading all data to the Firestore, there was a the .pdf files, which needed special handling. These are the steps the application takes to upload all data to the backend.
+These are the steps the application takes to upload all data to the backend.
 
 ### 1. Uploading company data in a collection and getting document reference
 ```
@@ -76,7 +78,7 @@ const companyRef = await addDoc(collection(db, "companies"), {
   description: company.description.value,
 });
 ```
-### 2. Upload employee data to the "employees" subcollection to the referenced document
+### 2. Upload employee data to the "employees" subcollection to the referenced company document
 
 Loop through each employee in the array and upload them
 ```
@@ -85,7 +87,7 @@ for (let index = 0; index < company.numOfEmp.value; index++) {
 }
 ```
 
-To handle PDF files, it first uploads the pdf file to firebase storage. When it is uploaded it get the URL of the file, and passes it in as the value to the CV field in employee data.
+To handle PDF files, it first uploads the pdf file to firebase storage. When it is uploaded, it gets the URL of the file, and passes it in as the value to the CV field in employee data.
 Then, it uploads it to the employees subcollection.
 ```
 const uploadEmployee = async (companyRef, index) => {
