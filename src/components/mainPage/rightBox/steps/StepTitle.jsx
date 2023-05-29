@@ -20,7 +20,7 @@ const StepTitle = ({ currStep }) => {
 				{[...Array(currStep)].map((e, i) => (
 					<div
 						key={i}
-						className="w-full h-full bg-red-400 rounded-full"
+						className="w-full h-full bg-custom-blue-dark rounded-full"
 					></div>
 				))}
 				{(currStep < totalNumOfSteps) && [...Array(totalNumOfSteps - currStep)].map((e, i) => (

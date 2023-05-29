@@ -5,7 +5,7 @@ const PrevButton = (props) => {
 
 	return (
 		<button
-			className="py-4 w-full rounded-2xl border-red-400 border-2 font-bold text-red-400"
+			className="w-full rounded-2xl border-custom-blue-dark border-2 font-bold text-custom-blue-dark"
 			onClick={() => {
 				incCurrStepBy(-1);
 			}}

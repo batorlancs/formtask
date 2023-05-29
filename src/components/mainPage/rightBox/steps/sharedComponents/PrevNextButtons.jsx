@@ -13,7 +13,7 @@ const PrevNextButtons = (props) => {
 	} = props;
 
 	return (
-		<div className="w-full mt-12 mb-12 grid grid-cols-2 gap-6">
+		<div className="w-full h-14 mt-12 mb-12 grid grid-cols-2 gap-6">
 			<div></div>
 			<div className="grid grid-cols-2 gap-4">
 				{isPrevious ? (
@@ -23,10 +23,10 @@ const PrevNextButtons = (props) => {
 				)}
 
 				{isLoading ? (
-					<div className="py-4 w-full rounded-2xl bg-red-400 font-bold text-white flex items-center justify-center">
+					<div className="w-full rounded-2xl bg-custom-blue-dark font-bold text-white flex items-center justify-center">
 						<img
 							src={LoadingAnimation}
-							className="invert h-8"
+							className="invert h-8 opacity-60"
 						></img>
 					</div>
 				) : (

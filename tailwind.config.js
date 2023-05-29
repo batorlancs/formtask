@@ -8,7 +8,12 @@ export default {
 		extend: {
             fontFamily: {
                 "custom": ["Wix Madefor Display", "sans-serif"],
-            }
+            },
+            colors: {
+                "custom-blue-light": "#87c9ff",
+                "custom-blue-dark": "#5788d0",
+                "custom-purple": "#534aad",
+            },
         },
 	},
 	plugins: [

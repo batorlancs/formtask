@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import CompanyTextInput from "../step1/inputs/CompanyTextInput";
 import EmployeeForm from "./forms/EmployeeForm";
 import PrevNextButtons from "../sharedComponents/PrevNextButtons";

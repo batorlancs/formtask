@@ -7,9 +7,21 @@ const EmployeeForm = (props) => {
 	const { index, employee, changeEmployee } = props;
 
 	return (
-		<div className={`${employee.error === "" ? "bg-black bg-opacity-5" : "bg-red-500 bg-opacity-10"} w-full min-h-32 rounded-2xl p-6`}>
+		<div
+			className={`${
+				employee.error === ""
+					? "bg-black bg-opacity-5"
+					: "bg-red-500 bg-opacity-10"
+			} w-full min-h-32 rounded-2xl p-6`}
+		>
 			<div className="flex flex-row gap-4 items-center justify-start mb-6">
-				<div className="font-bold text-red-600 text-xl bg-red-500 bg-opacity-10 h-10 w-10 rounded-full flex items-center justify-center">
+				<div
+					className={`${
+						employee.error === ""
+							? "text-custom-blue-dark bg-custom-blue-light bg-opacity-30"
+							: "text-red-500 bg-red-500 bg-opacity-20"
+					} font-bold text-xl h-10 w-10 rounded-full flex items-center justify-center`}
+				>
 					{props.index + 1}
 				</div>
 				<div className="flex flex-col items-start justify-center">

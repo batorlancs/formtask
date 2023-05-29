@@ -1,12 +1,15 @@
-import React, { useRef } from "react";
+import React, { useState, useRef } from "react";
 import { db } from "../../../../../firebase";
 import { doc, getDoc } from "firebase/firestore";
+import LoadingAnimation from "../../../../../assets/animations/loading.svg";
 
 const Step4 = (props) => {
 	const { firebaseID } = props;
+	const [isLoading, setIsLoading] = useState(false);
 	const linkRef = useRef(null);
 
 	const handleClick = async () => {
+        setIsLoading(true);
 		let result = {};
 		let employees = [];
 		const companyRef = doc(db, "companies", firebaseID);
@@ -33,6 +36,7 @@ const Step4 = (props) => {
 
 		// console.log(result);
 		downloadJson(result);
+        setIsLoading(false);
 	};
 
 	const downloadJson = (JsonData) => {
@@ -60,10 +64,11 @@ const Step4 = (props) => {
 				form!
 			</p>
 			<button
-				className="bg-red-400 text-white px-8 py-4 font-bold rounded-2xl mt-12"
+				className="bg-custom-blue-dark text-white w-[250px] h-14 font-bold rounded-2xl mt-12 flex items-center justify-center"
 				onClick={handleClick}
 			>
-				Download Data in JSON
+				{!isLoading && "Download Data in JSON"}
+                <img src={LoadingAnimation} className={`${!isLoading && "hidden"} invert h-8 opacity-60`}></img>
 			</button>
 			<a className="hidden" ref={linkRef}></a>
 		</div>

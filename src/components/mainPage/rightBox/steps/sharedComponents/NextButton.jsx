@@ -8,14 +8,14 @@ const NextButton = (props) => {
 			{typeof handleClick === "undefined" ? (
 				<button
 					type="submit"
-					className="py-4 w-full rounded-2xl bg-red-400 font-bold text-white flex items-center justify-center"
+					className="w-full rounded-2xl bg-custom-blue-dark font-bold text-white flex items-center justify-center"
 				>
 					{isFinal === true ? "Submit" : "Next"}
 				</button>
 			) : (
 				<button
 					onClick={handleClick}
-					className="py-4 w-full rounded-2xl bg-red-400 font-bold text-white"
+					className="w-full rounded-2xl bg-custom-blue-dark font-bold text-white"
 				>
 					{isFinal === true ? "Submit" : "Next"}
 				</button>

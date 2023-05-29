@@ -168,9 +168,9 @@ const RightBox = (props) => {
             
 			className={`${
 				props.startedForm ? "w-[60%]" : "w-[40%]"
-			} h-full bg-orange-200 duration-1000 flex items-start justify-center overflow-scroll overflow-x-hidden`}
+			} h-full bg-neutral-100 duration-1000 flex items-start justify-center overflow-scroll overflow-x-hidden`}
 		>
-			<div className="pt-32 px-60 w-full" ref={rightBoxRef}>
+			<div className={`pt-32 px-20 max-w-[800px] w-full`} ref={rightBoxRef}>
 				{props.startedForm ? (
 					<>
 						<StepTitle currStep={currStep} />

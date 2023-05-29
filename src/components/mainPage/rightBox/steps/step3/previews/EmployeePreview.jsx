@@ -15,7 +15,7 @@ const EmployeePreview = (props) => {
 		<div>
 			<div className="bg-black bg-opacity-5 rounded-2xl">
 				<h1 className="text-xl px-8 py-3 font-bold rounded-t-2xl bg-black bg-opacity-5">
-					<span className="text-red-500">{index + 1}</span> / {numOfEmp}
+					<span className="text-custom-blue-dark">{index + 1}</span> / {numOfEmp}
 				</h1>
 				<div className="px-8 pt-4 pb-6">
 					{Object.keys(employee).map((key) => {

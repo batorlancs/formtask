@@ -78,11 +78,11 @@ const Step3 = (props) => {
 
 	return (
 		<form onSubmit={handleSubmit} className="w-full">
-			<h1 className="text-2xl px-8 py-4 mb-6 font-bold rounded-2xl bg-red-400 text-white">
+			<h1 className="text-2xl px-8 py-4 mb-6 font-bold rounded-2xl bg-custom-blue-dark bg-opacity-70 text-white">
 				Company Details
 			</h1>
 			<CompanyPreview state={state} />
-			<h1 className="text-2xl px-8 py-4 mt-6 font-bold rounded-2xl bg-red-400 text-white">
+			<h1 className="text-2xl px-8 py-4 mt-6 font-bold rounded-2xl bg-custom-blue-dark bg-opacity-70 text-white">
 				Employee Details
 			</h1>
 			<div className="grid grid-cols-1 gap-6 mt-6">
