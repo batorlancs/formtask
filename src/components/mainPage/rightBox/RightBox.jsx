@@ -1,4 +1,4 @@
-import React, { useReducer, useState, useEffect } from "react";
+import React, { useReducer, useState, useEffect, useRef } from "react";
 import { GetStarted } from "./steps/getStarted/GetStarted";
 import StepTitle from "./steps/StepTitle";
 import Step1 from "./steps/step1/Step1";
@@ -13,7 +13,7 @@ const reducer = (state, action) => {
 		case "email":
 			return { ...state, email: { value: action.value, error: "" } };
 		case "numOfEmp":
-			// check if it is number
+			// check if input is a number or would be incorrect input (1-100)
 			if (isNaN(action.value) || action.value.includes(" "))
 				return { ...state };
 			let num = parseInt(action.value);
@@ -40,7 +40,6 @@ const reducer = (state, action) => {
 };
 
 const RightBox = (props) => {
-
 	// const [state, dispatch] = useReducer(reducer, {
 	// 	name: {
 	// 		value: "",
@@ -59,8 +58,8 @@ const RightBox = (props) => {
 	// 	},
 	// });
 
-    // dev resources
-    const [state, dispatch] = useReducer(reducer, {
+	// dev resources
+	const [state, dispatch] = useReducer(reducer, {
 		name: {
 			value: "dev",
 			error: "",
@@ -85,13 +84,11 @@ const RightBox = (props) => {
 			jobTitle: "Accountant",
 			age: "",
 			CV: null,
-            error: "",
+			error: "",
 		},
 	]);
 
-    const [firebaseID, setFirebaseID] = useState("");
-
-    console.log(employees);
+	const [firebaseID, setFirebaseID] = useState("");
 
 	const populateEmployees = (length) => {
 		let employeeData = {
@@ -100,7 +97,7 @@ const RightBox = (props) => {
 			jobTitle: "Accountant",
 			age: "",
 			CV: null,
-            error: ""
+			error: "",
 		};
 		for (let i = 0; i < length - employees.length; i++) {
 			setEmployees((prev) => [...prev, employeeData]);
@@ -112,11 +109,11 @@ const RightBox = (props) => {
 	}, [state.numOfEmp.value]);
 
 	const changeEmployee = (index, employee) => {
-        setEmployees(prev => {
-            let temp = [...prev];
-            temp[index] = employee;
-            return temp;
-        })
+		setEmployees((prev) => {
+			let temp = [...prev];
+			temp[index] = employee;
+			return temp;
+		});
 	};
 
 	const [currStep, setCurrStep] = useState(1);
@@ -124,6 +121,13 @@ const RightBox = (props) => {
 	const incCurrStepBy = (num) => {
 		setCurrStep((prev) => prev + num);
 	};
+
+    const rightBoxRef = useRef(null);
+
+    useEffect(() => {
+        if (rightBoxRef.current)
+            rightBoxRef.current.scrollIntoView({ block: 'start' });
+    }, [currStep])
 
 	const LoadCurrentStep = () => {
 		if (currStep === 1)
@@ -142,6 +146,7 @@ const RightBox = (props) => {
 					dispatch={dispatch}
 					employees={employees}
 					changeEmployee={changeEmployee}
+                    rightBoxRef={rightBoxRef}
 				/>
 			);
 		else if (currStep === 3)
@@ -149,40 +154,27 @@ const RightBox = (props) => {
 				<Step3
 					incCurrStepBy={incCurrStepBy}
 					state={state}
-                    employees={employees}
-                    setFirebaseID={setFirebaseID}
+					employees={employees}
+					setFirebaseID={setFirebaseID}
 				/>
 			);
 		else if (currStep === 4)
-            return (
-                <Step4 
-                    firebaseID={firebaseID}
-                />
-            );
-
-		// return (
-		// 	<Step2
-		// 		incCurrStepBy={incCurrStepBy}
-		// 		state={state}
-		// 		dispatch={dispatch}
-		//         employees={employees}
-		//         changeEmployee={changeEmployee}
-		// 	/>
-		// );
+			return <Step4 firebaseID={firebaseID} state={state} />;
 
 	};
 
 	return (
 		<div
+            
 			className={`${
 				props.startedForm ? "w-[60%]" : "w-[40%]"
 			} h-full bg-orange-200 duration-1000 flex items-start justify-center overflow-scroll overflow-x-hidden`}
 		>
-			<div className="mt-32 px-60 w-full">
+			<div className="pt-32 px-60 w-full" ref={rightBoxRef}>
 				{props.startedForm ? (
 					<>
 						<StepTitle currStep={currStep} />
-						{ LoadCurrentStep() }
+						{LoadCurrentStep()}
 					</>
 				) : (
 					<GetStarted toggleStartedForm={props.toggleStartedForm} />

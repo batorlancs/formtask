@@ -96,13 +96,7 @@ const Step1 = (props) => {
 					actionType="description"
 				/>
 			</div>
-			<PrevNextButtons
-				incCurrStepBy={props.incCurrStepBy}
-				previous={false}
-				next={true}
-                isSubmit={true}
-                isfinal={false}
-			/>
+			<PrevNextButtons incCurrStepBy={incCurrStepBy} />
 		</form>
 	);
 };

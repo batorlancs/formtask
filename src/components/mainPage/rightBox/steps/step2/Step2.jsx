@@ -3,24 +3,27 @@ import CompanyTextInput from "../step1/inputs/CompanyTextInput";
 import EmployeeForm from "./forms/EmployeeForm";
 import PrevNextButtons from "../sharedComponents/PrevNextButtons";
 
+const errorMessage = "Handle all errors to continue! Each employee form shows what is the error!";
+
 const Step2 = (props) => {
-	const { incCurrStepBy, state, dispatch, employees, changeEmployee } = props;
+	const { incCurrStepBy, state, dispatch, employees, changeEmployee, rightBoxRef } = props;
 
 	const [warning, setWarning] = useState("");
+    const [buttonPressed, setButtonPressed] = useState(false);
 
     useEffect(() => {
+        if (!buttonPressed) return;
         for (let i = 0; i < state.numOfEmp.value; i++) {
 			let validationResult = validateForm(i);
-			if (validationResult === "") {
-				setWarning("Handle all errors to continue!");
+			if (validationResult !== "") {
+				setWarning(errorMessage);
                 break;
 			}
 		}
     }, [])
 
-    const componentRef = useRef(null)
-
-	const handleNext = () => {
+	const handleClick = () => {
+        setButtonPressed(true);
 		let success = true;
 		for (let i = 0; i < state.numOfEmp.value; i++) {
 			let validationResult = validateForm(i);
@@ -37,10 +40,10 @@ const Step2 = (props) => {
 		if (success) {
 			incCurrStepBy(1);
 		} else {
-            if (componentRef.current) {
-                componentRef.current.scrollIntoView({ behaviour: "smooth" });
+            if (rightBoxRef.current) {
+                rightBoxRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
-            setWarning("Handle all errors to continue!");
+            setWarning(errorMessage);
         }
 	};
 
@@ -62,7 +65,7 @@ const Step2 = (props) => {
 	};
 
 	return (
-		<div ref={componentRef}>
+		<div>
 			<div className="grid grid-cols-2 gap-6">
 				<CompanyTextInput
 					type="text"
@@ -75,7 +78,7 @@ const Step2 = (props) => {
 				/>
 				<div className={`${warning !== "" ? "bg-red-500 border-red-500" : "bg-orange-500 border-orange-500"} border-[3px] border-opacity-40 px-8 bg-opacity-10 rounded-2xl flex items-center`}>
 					<p className={`${warning !== "" ? "text-red-500" : "text-orange-500"} opacity-80 text-sm font-bold`}>
-						{warning !== "" ? warning : "Please make sure you fill out all employee forms and each field inside the forms."}
+						{warning !== "" ? warning : "Please make sure you fill out all employee forms and each field inside."}
 					</p>
 				</div>
 			</div>
@@ -96,11 +99,8 @@ const Step2 = (props) => {
 			</div>
 			<PrevNextButtons
 				incCurrStepBy={incCurrStepBy}
-				previous={true}
-				next={true}
-				isSubmit={false}
-				isFinal={false}
-				handleNext={handleNext}
+				isPrevious={true}
+				handleClick={handleClick}
 			/>
 		</div>
 	);

@@ -25,6 +25,7 @@ const EmployeePreview = (props) => {
 						if (key === "CV") {
 							return (
 								<DataRowElement
+                                    key={key}
 									title="CV"
 									value={
 										employee[key]
@@ -38,6 +39,7 @@ const EmployeePreview = (props) => {
 						
                         return (
                             <DataRowElement
+                                key={key}
                                 title={alias[key]}
                                 value={employee[key]}
                             />

@@ -1,36 +1,36 @@
 import React from "react";
+import LoadingAnimation from "../../../../../assets/animations/loading.svg";
+import PrevButton from "./PrevButton";
+import NextButton from "./NextButton";
 
 const PrevNextButtons = (props) => {
-	const { incCurrStepBy, previous, next, isSubmit, isFinal, handleNext } = props;
+	const {
+		incCurrStepBy,
+		isPrevious = false,
+		isFinal = false,
+		handleClick,
+		isLoading = false,
+	} = props;
 
 	return (
 		<div className="w-full mt-12 mb-12 grid grid-cols-2 gap-6">
-            <div></div>
+			<div></div>
 			<div className="grid grid-cols-2 gap-4">
-				{previous ? (
-					<button
-						className="py-4 w-full rounded-2xl border-red-400 border-2 font-bold text-red-400"
-						onClick={() => {
-							incCurrStepBy(-1);
-						}}
-					>
-						Previous
-					</button>
-				) : <div></div> }
-				{next && isSubmit === true ? (
-					<button
-						type="submit"
-						className="py-4 w-full rounded-2xl bg-red-400 font-bold text-white"
-					>
-						{isFinal && isFinal === true ? "Submit" : "Next"}
-					</button>
+				{isPrevious ? (
+					<PrevButton incCurrStepBy={incCurrStepBy} />
 				) : (
-					<button
-						onClick={handleNext}
-						className="py-4 w-full rounded-2xl bg-red-400 font-bold text-white"
-					>
-						{isFinal && isFinal === true ? "Submit" : "Next"}
-					</button>
+					<div></div>
+				)}
+
+				{isLoading ? (
+					<div className="py-4 w-full rounded-2xl bg-red-400 font-bold text-white flex items-center justify-center">
+						<img
+							src={LoadingAnimation}
+							className="invert h-8"
+						></img>
+					</div>
+				) : (
+					<NextButton isFinal={isFinal} handleClick={handleClick} />
 				)}
 			</div>
 		</div>

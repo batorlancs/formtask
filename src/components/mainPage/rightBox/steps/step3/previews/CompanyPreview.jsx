@@ -15,6 +15,7 @@ const CompanyPreview = (props) => {
 		<div className="bg-black bg-opacity-5 rounded-2xl px-8 py-6">
             {Object.keys(state).map((key) => (
                 <DataRowElement
+                    key={key}
                     title={alias[key]}
                     value={state[key].value}
                 />
