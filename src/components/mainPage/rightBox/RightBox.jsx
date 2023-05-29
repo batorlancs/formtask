@@ -197,7 +197,7 @@ const RightBox = (props) => {
 	return (
 		<div
 			className={`${
-				props.startedForm ? "w-[60%] max-xl:w-[80%] max-lg:w-full" : "w-[50%] max-xl:w-[60%] max-lg:w-[80%]"
+				props.startedForm ? "w-[60%] max-xl:w-[80%] max-lg:w-full" : "w-[50%] max-xl:w-[60%] max-lg:w-full"
 			} flex h-full items-start justify-center overflow-scroll overflow-x-hidden bg-neutral-100 duration-1000`}
 		>
 			<div

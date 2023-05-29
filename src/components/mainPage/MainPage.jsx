@@ -17,12 +17,17 @@ const MainPage = () => {
 
 	return (
 		<div>
-			<div className="flex h-screen w-screen flex-row font-custom">
-				<LeftBox startedForm={startedForm} />
-				<RightBox
-					startedForm={startedForm}
-					toggleStartedForm={toggleStartedForm}
-				/>
+			<div className="h-screen w-screen font-custom flex items-center justify-center">
+				<div className="h-full w-full max-w-[2400px] flex flex-row max-sm:hidden">
+                    <LeftBox startedForm={startedForm} />
+                    <RightBox
+                        startedForm={startedForm}
+                        toggleStartedForm={toggleStartedForm}
+                    />
+                </div>
+                <div className="sm:hidden p-12">
+                    Sorry, This page is not suitable for mobile. Please visit this website on a device with a bigger screen to get access.
+                </div>
 			</div>
 		</div>
 	);
