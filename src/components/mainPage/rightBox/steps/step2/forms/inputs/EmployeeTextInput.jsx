@@ -39,7 +39,7 @@ const EmployeeTextInput = (props) => {
             onChange={(event) => {
                 handleChange(event.target.value);
             }}
-            className="bg-black bg-opacity-5 w-full rounded-2xl px-4 py-3 placeholder:text-black placeholder:text-opacity-30"
+            className="bg-black bg-opacity-5 w-full rounded-2xl px-4 py-3 placeholder:text-black placeholder:text-opacity-30 max-2xl:text-sm"
         ></input>
 	);
 };

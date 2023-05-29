@@ -65,10 +65,10 @@ const Step4 = (props) => {
 
 	return (
 		<div>
-			<div className="text-3xl font-bold">
+			<div className="text-3xl font-bold max-2xl:text-2xl">
 				Thank you for your submission!
 			</div>
-			<p className="mt-6 text-lg">
+			<p className="mt-6 text-lg max-2xl:text-base">
 				Your data has been uploaded to a firestore cloud database, which
 				you can only access now by clicking the 'Download Data in JSON'
 				button. If you leave this page you will not have access to the
@@ -76,7 +76,7 @@ const Step4 = (props) => {
 				form!
 			</p>
 			<button
-				className="mt-12 flex h-14 w-[250px] items-center justify-center rounded-2xl bg-custom-blue-dark font-bold text-white"
+				className="mt-12 flex h-14 w-[250px] items-center justify-center rounded-2xl bg-custom-blue-dark font-bold text-white max-2xl:h-12 max-2xl:text-sm max-2xl:w-[220px] max-2xl:mt-8"
 				onClick={handleClick}
 			>
 				{isLoading ? (

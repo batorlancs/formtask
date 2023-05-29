@@ -6,11 +6,11 @@ const LeftBox = (props) => {
 	return (
 		<div
 			className={`${
-				props.startedForm ? "w-[40%]" : "w-[50%]"
-			} flex h-full justify-center overflow-hidden bg-[url('assets/shapes1.svg')] bg-cover px-32 pt-32 duration-1000 `}
+				props.startedForm ? "w-[40%] max-xl:w-[20%] max-lg:hidden" : "w-[50%] max-xl:w-[40%] max-lg:w-[20%]"
+			} flex h-full justify-center overflow-hidden bg-[url('assets/shapes1.svg')] bg-cover px-32 pt-32 duration-1000 max-2xl:px-24 max-2xl:pt-24`}
 		>
 			<div className="flex flex-col gap-4 text-custom-purple">
-				<h1 className="text-4xl font-bold">
+				<h1 className="text-4xl font-bold max-2xl:text-3xl max-xl:hidden">
 					Help us gather data to provide you countless helpful
 					statistics.
 				</h1>

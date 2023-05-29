@@ -52,11 +52,11 @@ const EmployeeFileInput = (props) => {
 			>
 				{file ? (
 					<div className="flex flex-row items-center justify-center gap-2">
-						<p>CV</p>
-						<img src={CheckIcon} className="h-6"></img>
+						<p className="max-2xl:text-sm">CV</p>
+						<img src={CheckIcon} className="h-6 max-2xl:h-5"></img>
 					</div>
 				) : (
-					<p className="">Import CV</p>
+					<p className="max-2xl:text-sm">Import CV</p>
 				)}
 				<input
 					type="file"
@@ -67,7 +67,7 @@ const EmployeeFileInput = (props) => {
 			</label>
 			{isHover && file && (
 				<div>
-					<div className="ml-10 mt-1 h-0 w-0 border-x-[20px] border-b-[20px] border-white border-x-transparent"></div>
+					<div className="ml-10 mt-1 h-0 w-0 border-x-[20px] border-b-[20px] border-white border-x-transparent max-2xl:ml-8"></div>
 					<div className="absolute top-16 whitespace-nowrap rounded-2xl bg-white px-4 py-3 text-xs shadow-xl backdrop-blur-xl">
 						{file ? file.name : "Select .pdf file"}
 					</div>

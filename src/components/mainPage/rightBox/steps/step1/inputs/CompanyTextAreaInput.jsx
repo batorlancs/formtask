@@ -27,7 +27,7 @@ const CompanyTextAreaInput = (props) => {
 						value: e.target.value,
 					});
 				}}
-				className="h-40 w-full resize-none rounded-2xl bg-black bg-opacity-5 px-8 py-3 text-lg scrollbar-none placeholder:text-black placeholder:text-opacity-40"
+				className="h-40 w-full resize-none rounded-2xl bg-black bg-opacity-5 px-8 py-3 text-lg scrollbar-none placeholder:text-black placeholder:text-opacity-40 max-2xl:h-24 max-2xl:text-base"
 			></textarea>
 		</div>
 	);

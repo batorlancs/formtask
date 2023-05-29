@@ -8,7 +8,7 @@ const DataRowElement = (props) => {
 	const { title, value } = props;
 
 	return (
-		<div className="grid grid-cols-2 text-lg ">
+		<div className="grid grid-cols-2 text-lg max-2xl:text-base">
 			<h2 className="font-bold">{title}:</h2>
 			<p className="overflow-hidden text-ellipsis">
 				{value === "" ? "-" : value}

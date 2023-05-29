@@ -43,10 +43,10 @@ const CompanyTextInput = (props) => {
 					error !== ""
 						? "bg-red-500 bg-opacity-20"
 						: "bg-black bg-opacity-5"
-				} w-full rounded-2xl px-8 py-3 text-lg placeholder:text-black placeholder:text-opacity-30`}
+				} w-full rounded-2xl px-8 py-3 text-lg placeholder:text-black placeholder:text-opacity-30 max-2xl:text-base`}
 			></input>
 			{error !== "" && (
-				<p className="float-right mt-2 text-red-500">{error}</p>
+				<p className="float-right mt-2 text-red-500 max-2xl:text-sm">{error}</p>
 			)}
 		</div>
 	);

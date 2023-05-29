@@ -15,9 +15,9 @@ const EmployeeForm = (props) => {
 				employee.error === ""
 					? "bg-black bg-opacity-5"
 					: "bg-red-500 bg-opacity-10"
-			} min-h-32 w-full rounded-2xl p-6`}
+			} min-h-32 w-full rounded-2xl p-6 max-2xl:p-4`}
 		>
-			<div className="mb-6 flex flex-row items-center justify-start gap-4">
+			<div className="mb-6 flex flex-row items-center justify-start gap-4 max-2xl:mb-3">
 				<div
 					className={`${
 						employee.error === ""
@@ -28,7 +28,7 @@ const EmployeeForm = (props) => {
 					{props.index + 1}
 				</div>
 				<div className="flex flex-col items-start justify-center">
-					<h1 className="text-xl font-bold">Employee</h1>
+					<h1 className="text-xl font-bold max-2xl:text-lg">Employee</h1>
 					{employee.error !== "" && (
 						<p className=" -mt-1 text-sm text-red-600">
 							{employee.error}

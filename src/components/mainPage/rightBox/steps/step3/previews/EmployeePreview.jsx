@@ -20,11 +20,11 @@ const EmployeePreview = (props) => {
 	return (
 		<div>
 			<div className="rounded-2xl bg-black bg-opacity-5">
-				<h1 className="rounded-t-2xl bg-black bg-opacity-5 px-8 py-3 text-xl font-bold">
+				<h1 className="rounded-t-2xl bg-black bg-opacity-5 px-8 py-3 text-xl font-bold max-2xl:text-lg max-2xl:py-2">
 					<span className="text-custom-blue-dark">{index + 1}</span> /{" "}
 					{numOfEmp}
 				</h1>
-				<div className="px-8 pb-6 pt-4">
+				<div className="px-8 pb-6 pt-4 max-2xl:pt-3">
 					{Object.keys(employee).map((key) => {
 						if (key === "error") return;
 

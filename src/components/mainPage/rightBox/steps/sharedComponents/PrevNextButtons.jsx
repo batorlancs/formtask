@@ -22,7 +22,7 @@ const PrevNextButtons = (props) => {
 	} = props;
 
 	return (
-		<div className="mb-12 mt-12 grid h-14 w-full grid-cols-2 gap-6">
+		<div className="mb-12 mt-12 grid h-14 w-full grid-cols-2 gap-6 max-2xl:h-12">
 			<div></div>
 			<div className="grid grid-cols-2 gap-4">
 				{isPrevious ? (

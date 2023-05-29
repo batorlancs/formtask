@@ -108,7 +108,7 @@ const Step2 = (props) => {
 					<p
 						className={`${
 							warning !== "" ? "text-red-500" : "text-orange-500"
-						} text-sm font-bold opacity-80`}
+						} text-sm font-bold opacity-80 max-2xl:text-xs`}
 					>
 						{warning !== ""
 							? warning

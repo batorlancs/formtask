@@ -19,9 +19,9 @@ const StepTitle = (props) => {
 	const { currStep } = props;
 
 	return (
-		<div className="mb-12 w-full">
-			<h1 className="mb-4 text-3xl font-bold">{stepTitles[currStep]}</h1>
-			<div className="flex h-3 w-full flex-row justify-between gap-2">
+		<div className="mb-12 w-full max-2xl:mb-8">
+			<h1 className="mb-4 text-3xl font-bold max-2xl:text-2xl max-2xl:mb-2">{stepTitles[currStep]}</h1>
+			<div className="flex h-3 w-full flex-row justify-between gap-2 max-2xl:h-2">
 				{[...Array(currStep)].map((e, i) => (
 					<div
 						key={i}

@@ -69,7 +69,7 @@ const EmployeeDropDownInput = (props) => {
 			<div className="relative">
 				<button
 					onClick={toggleDropDown}
-					className="flex w-full cursor-pointer flex-row justify-between rounded-2xl bg-black bg-opacity-5 px-4 py-3"
+					className="flex w-full cursor-pointer flex-row justify-between rounded-2xl bg-black bg-opacity-5 px-4 py-3 max-2xl:text-sm"
 				>
 					<p>{currOption}</p>
 					<img
@@ -78,7 +78,7 @@ const EmployeeDropDownInput = (props) => {
 					></img>
 				</button>
 				{dropDown && (
-					<ul className="absolute top-[0px] z-10 w-full rounded-2xl bg-white p-4 shadow-xl backdrop-blur-xl">
+					<ul className="absolute top-[0px] z-10 w-full rounded-2xl bg-white p-4 shadow-xl backdrop-blur-xl max-2xl:text-sm">
 						{options.map((item) => (
 							<li
 								key={item}
